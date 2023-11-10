@@ -38,7 +38,7 @@ public class Date {
     // TODO: 특별 할인 해당 여부
     private boolean isSpecialDiscount() {
         for (int specialDiscountDate : SPECIAL_DISCOUNT) {
-            if (date == specialDiscountDate ) {
+            if (date == specialDiscountDate) {
                 return true;
             }
         }
