@@ -48,4 +48,16 @@ public class DateTest {
         Date nonSpecialDiscountDate = new Date(15);
         assertFalse(nonSpecialDiscountDate.isSpecialDiscount());
     }
+
+    @DisplayName("평일, 주말 할인 판별 테스트")
+    @Test
+    void isWeekDayOrWeekEnd() {
+        // 평일(수요일 판별)
+        Date weekDayDate = new Date(13);
+        assertEquals("weekDay", weekDayDate.getDayOfWeek());
+
+        // 주말(토요일 판별)
+        Date weekEndDate = new Date(2);
+        assertEquals("weekEnd", weekEndDate.getDayOfWeek());
+    }
 }

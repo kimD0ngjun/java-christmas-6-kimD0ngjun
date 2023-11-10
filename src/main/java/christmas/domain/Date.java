@@ -11,6 +11,8 @@ public class Date {
     private final int DDAY_MAX_DATE = 25;
     // 특별 할인 이벤트
     private final int[] SPECIAL_DISCOUNT = {3, 10, 17, 24, 25, 31};
+    // 평일, 주말 할인 판별을 위한 연도
+    private final int YEAR = 2023;
 
     private final int date;
 
@@ -45,9 +47,9 @@ public class Date {
     }
 
     // TODO: 아직 평일 할인(일~목), 주말 할인(금, 토) 여부
-    public String getDayType() {
+    public String getDayOfWeek() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.DECEMBER, date);  // 예시 연도와 월을 적절히 변경
+        calendar.set(YEAR, Calendar.DECEMBER, date);  // 예시 연도와 월을 적절히 변경
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
