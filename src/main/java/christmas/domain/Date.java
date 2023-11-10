@@ -20,4 +20,9 @@ public class Date {
             throw new IllegalArgumentException(ErrorMessage.WRONG_DATE.getMessage());
         }
     }
+
+//    // 날짜가 유효한지 확인
+//    public boolean isValidDate(int date) {
+//        return date >= MIN_DATE && date <= MAX_DATE;
+//    }
 }
