@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.message.ErrorMessage;
+
 public enum Menu {
     SOUP("양송이수프", 6_000, Category.APPETIZER),
     TAPAS("타파스", 5_500, Category.APPETIZER),
@@ -24,6 +26,7 @@ public enum Menu {
         this.category = category;
     }
 
+
     public String getName() {
         return name;
     }
@@ -34,6 +37,16 @@ public enum Menu {
 
     public Category getCategory() {
         return category;
+    }
+
+    // 입력값이 메뉴판에 있는 메뉴인지 판별
+    public static Menu getMenuByName(String orderMenu) {
+        for (Menu menu : values()) {
+            if (menu.getName().equals(orderMenu)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.WRONG_ORDER.getMessage());
     }
 
     public enum Category {
