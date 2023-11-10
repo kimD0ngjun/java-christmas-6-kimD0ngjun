@@ -7,9 +7,11 @@ public class Date {
     private final int MIN_DATE = 1;
     private final int MAX_DATE = 31;
     // 크리스마스 디데이 이벤트
-    private final int[] CHRISTMAS_DATES = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30};
+    private final int DDAY_MAX_DATE = 25;
     // 특별 할인 이벤트
     private final int[] SPECIAL_DISCOUNT = {3, 10, 17, 24, 25, 31};
+
+    // TODO : 아직 평일 할인(일~목), 주말 할인(금, 토) 구현 더 해야 돼
 
     private final int date;
 
@@ -26,17 +28,15 @@ public class Date {
     }
 
     // TODO: 크리스마스 디데이 해당 여부
-    private boolean isChristmasDDay() {
-        for (int christmasDate : CHRISTMAS_DATES) {
-            if (date == christmasDate) {
-                return true;
-            }
+    public boolean isChristmasDDay() {
+        if (date <= DDAY_MAX_DATE) {
+            return true;
         }
         return false;
     }
 
     // TODO: 특별 할인 해당 여부
-    private boolean isSpecialDiscount() {
+    public boolean isSpecialDiscount() {
         for (int specialDiscountDate : SPECIAL_DISCOUNT) {
             if (date == specialDiscountDate) {
                 return true;

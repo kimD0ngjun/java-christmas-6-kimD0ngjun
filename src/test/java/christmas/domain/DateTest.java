@@ -24,4 +24,28 @@ public class DateTest {
         assertThrows(IllegalArgumentException.class, () -> new Date(0));
         assertThrows(IllegalArgumentException.class, () -> new Date(-5));
     }
+
+    @DisplayName("크리스마스 D-Day 여부 테스트")
+    @Test
+    void isChristmasDDayTest() {
+        // 크리스마스 D-Day인 날짜를 입력
+        Date christmasDate = new Date(15);
+        assertTrue(christmasDate.isChristmasDDay());
+
+        // 크리스마스 D-Day가 아닌 날짜를 입력
+        Date nonChristmasDate = new Date(27);
+        assertFalse(nonChristmasDate.isChristmasDDay());
+    }
+
+    @DisplayName("특별 할인 여부 테스트")
+    @Test
+    void isSpecialDiscountTest() {
+        // 특별 할인 이벤트인 날짜를 입력
+        Date specialDiscountDate = new Date(3);
+        assertTrue(specialDiscountDate.isSpecialDiscount());
+
+        // 특별 할인 이벤트가 아닌 날짜를 입력
+        Date nonSpecialDiscountDate = new Date(15);
+        assertFalse(nonSpecialDiscountDate.isSpecialDiscount());
+    }
 }
