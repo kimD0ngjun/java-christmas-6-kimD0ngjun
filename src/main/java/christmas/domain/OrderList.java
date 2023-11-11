@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 주문서 양식
-public class OrderListForm {
+public class OrderList {
     private List<OrderMenu> orderList;
 
-    public OrderListForm(List<String> orderListForm) {
+    public OrderList(List<String> orderListForm) {
         validateForm(orderListForm);
         this.orderList = generateOrderList(orderListForm);
     }

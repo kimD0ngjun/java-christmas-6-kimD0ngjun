@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -15,21 +14,21 @@ public class OrderListFormTest {
     @Test
     public void validateOrderListForm_ValidData_NoExceptionThrown() {
         List<String> validOrderList = Arrays.asList("티본스테이크-2", "해산물파스타-3", "레드와인-1");
-        assertDoesNotThrow(() -> OrderListForm.validateForm(validOrderList));
+        assertDoesNotThrow(() -> OrderList.validateForm(validOrderList));
     }
 
     @DisplayName("-표가 없으면 예외가 발생한다.")
     @Test
     public void validateOrderListForm_InvalidDash_ExceptionThrown() {
         List<String> noDashOrderList = Arrays.asList("티본스테이크-2", "해산물파스타3", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(noDashOrderList));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(noDashOrderList));
 
         List<String> invalidMenuCase = Arrays.asList("티본스테이크-2", "해산물파스타해산물파스타", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(invalidMenuCase));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(invalidMenuCase));
 
         List<String> invalidNumberCase = Arrays.asList("티본스테이크-2", "33", "레드와인-1");
         assertThrows(
-                IllegalArgumentException.class, () -> OrderListForm.validateForm(invalidNumberCase)
+                IllegalArgumentException.class, () -> OrderList.validateForm(invalidNumberCase)
         );
     }
 
@@ -37,13 +36,13 @@ public class OrderListFormTest {
     @Test
     public void validateOrderListForm_InvalidMenuNumber_ExceptionThrown() {
         List<String> wrongDashCase = Arrays.asList("-티본스테이크-2", "해산물파스타-3", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(wrongDashCase));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(wrongDashCase));
 
         List<String> onlyMenuCase = Arrays.asList("티본스테이크-티본스테이크", "해산물파스타-3", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(onlyMenuCase));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(onlyMenuCase));
 
         List<String> whiteSpaceCase = Arrays.asList(" -티본스테이크", "해산물파스타- ", " ");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(whiteSpaceCase));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(whiteSpaceCase));
 
 //        List<String> onlyNumberCase = Arrays.asList("2-2", "해산물파스타-3", "레드와인-1");
 //        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(onlyNumberCase));
@@ -54,10 +53,10 @@ public class OrderListFormTest {
     @Test
     public void validateOrderListForm_InvalidUnit_ExceptionThrown() {
         List<String> invalidMinusNumber = Arrays.asList("티본스테이크-2", "해산물파스타--3", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(invalidMinusNumber));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(invalidMinusNumber));
 
         List<String> invalidZeroNumber = Arrays.asList("티본스테이크-2", "해산물파스타-0", "레드와인-1");
-        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(invalidZeroNumber));
+        assertThrows(IllegalArgumentException.class, () -> OrderList.validateForm(invalidZeroNumber));
     }
 
 }
