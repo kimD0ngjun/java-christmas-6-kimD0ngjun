@@ -14,11 +14,11 @@ import java.util.Map;
 
 // 주문서 양식
 public class OrderListForm {
-    private List<Map<OrderMenu, Integer>> orderMapList;
+    private List<String> orderMapList;
 
     public OrderListForm(List<String> orderListForm) {
         validateForm(orderListForm);
-        this.orderMapList = convertToOrderMapList(orderListForm);
+        this.orderMapList = orderListForm;
     }
 
     public static void validateForm(List<String> orderListForm) {
@@ -50,28 +50,4 @@ public class OrderListForm {
         }
     }
 
-    // Map들 모아서 List화시키기
-    private List<Map<OrderMenu, Integer>> convertToOrderMapList(List<String> orderListForm) {
-        List<Map<OrderMenu, Integer>> result = new ArrayList<>();
-
-        for (String order : orderListForm) {
-            result.add(convertToOrderMap(order));
-        }
-
-        return result;
-    }
-
-    // 각각 요소들 Map화시키기
-    private Map<OrderMenu, Integer> convertToOrderMap(String order) {
-        String[] parts = order.split("-");
-        String menuName = parts[0];
-        int quantity = Integer.parseInt(parts[1]);
-
-        OrderMenu orderMenu = new OrderMenu(menuName);
-
-        Map<OrderMenu, Integer> orderMap = new HashMap<>();
-        orderMap.put(orderMenu, quantity);
-
-        return orderMap;
-    }
 }

@@ -2,13 +2,20 @@ package christmas.domain;
 
 public class OrderMenu {
     private Menu orderMenu;
+    private int quantity;
 
-    public OrderMenu(String orderMenu) {
+    public OrderMenu(String orderMenu, int quantity) {
         this.orderMenu = Menu.getMenuByName(orderMenu);
+        this.quantity = quantity;
     }
 
     public Menu getMenu() {
         return orderMenu;
+    }
+
+    // 주문 메뉴의 수량 반환
+    public int getQuantity() {
+        return quantity;
     }
 
     // 주문 메뉴의 가격 반환
@@ -20,4 +27,5 @@ public class OrderMenu {
     public Menu.Category getCategory() {
         return orderMenu.getCategory();
     }
+
 }
