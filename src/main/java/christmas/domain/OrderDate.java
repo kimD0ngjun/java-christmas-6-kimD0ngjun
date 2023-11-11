@@ -3,7 +3,7 @@ package christmas.domain;
 import christmas.message.ErrorMessage;
 import java.util.Calendar;
 
-public class Date {
+public class OrderDate {
     // 상수로 날짜 범위 정의
     private final int MIN_DATE = 1;
     private final int MAX_DATE = 31;
@@ -16,7 +16,7 @@ public class Date {
 
     private final int date;
 
-    public Date(Integer date) {
+    public OrderDate(Integer date) {
         validateDate(date);
         this.date = date;
     }
