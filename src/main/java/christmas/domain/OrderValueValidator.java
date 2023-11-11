@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class OrderValidator {
+public class OrderValueValidator {
     public static void hasDuplicateMenus(List<OrderMenu> orderList) {
         Set<Menu> uniqueMenus = new HashSet<>();
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DateTest {
+public class OrderDateTest {
 
     @DisplayName("1일부터 31일까지 중의 숫자를 입력해야 한다.")
     @Test

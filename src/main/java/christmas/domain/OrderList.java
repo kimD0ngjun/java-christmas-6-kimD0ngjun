@@ -10,9 +10,9 @@ public class OrderList {
     public OrderList(List<String> orderListForm) {
         validateForm(orderListForm);
         List<OrderMenu> form = OrderFormParser.parseOrderForm(orderListForm);
-        OrderValidator.hasDuplicateMenus(form);
-        OrderValidator.isTotalQuantityValid(form);
-        OrderValidator.validateBeverageOnlyCategory(form);
+        OrderValueValidator.hasDuplicateMenus(form);
+        OrderValueValidator.isTotalQuantityValid(form);
+        OrderValueValidator.validateBeverageOnlyCategory(form);
         this.orderList = form;
     }
 
