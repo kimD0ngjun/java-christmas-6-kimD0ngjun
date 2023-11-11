@@ -2,25 +2,34 @@ package christmas.domain;
 
 import christmas.message.ErrorMessage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-// 바로 Map화를 시켜도 되나... 그 과정에서 유효성 검증을 수행할 수 있으려나....
-// 어차피 메뉴명 옳은지 여부는 OrderMenu 클래스에서 수행하고 있잖아.
-// 수량도 OrderQuantity 클래스 나중에 만들어서 숫자인지 여부 판별할 텐데.
-// 근데 Map화 시킬 때 제네릭에 지정된 데이터 타입 안 들어가면 컴파일 예외 발생하지 않나
-// IllegalArgumentException는 런타임 예외인데 흠....
 
 // 주문서 양식
 public class OrderListForm {
-    private List<String> orderMapList;
+    private List<OrderMenu> orderList;
 
     public OrderListForm(List<String> orderListForm) {
         validateForm(orderListForm);
-        this.orderMapList = orderListForm;
+        this.orderList = generateOrderList(orderListForm);
     }
 
+    private List<OrderMenu> generateOrderList(List<String> orderListForm) {
+        List<OrderMenu> orderList= new ArrayList<>();;
+
+        for (String order : orderListForm) {
+            String[] parts = order.split("-");
+
+            String orderMenu = parts[0];
+            int orderQuantity = Integer.parseInt(parts[1]);
+
+            OrderMenu menu = new OrderMenu(orderMenu, orderQuantity);
+
+            orderList.add(menu);
+        }
+        return orderList;
+    }
+
+    // 유효성 검증하는 메소드
     public static void validateForm(List<String> orderListForm) {
         for (String order : orderListForm) {
             if (!isValidOrderFormat(order)) {
@@ -40,7 +49,7 @@ public class OrderListForm {
         return str != null && !str.isBlank();
     }
 
-    // 수량이 제대로 입력됐는지, 양의 정수인지는 OrderQuantity 클래스에서 정적 메소드로 작성해서 여기로 들고오는 식으로 리팩토링?
+    // 수량이 제대로 입력됐는지
     private static boolean isValidNumber(String str) {
         try {
             int quantity = Integer.parseInt(str);
