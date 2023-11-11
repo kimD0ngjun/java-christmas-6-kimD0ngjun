@@ -40,6 +40,9 @@ public class OrderListFormTest {
         List<String> onlyMenuCase = Arrays.asList("티본스테이크-티본스테이크", "해산물파스타-3", "레드와인-1");
         assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(onlyMenuCase));
 
+        List<String> whiteSpaceCase = Arrays.asList(" -티본스테이크", "해산물파스타- ", " ");
+        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(whiteSpaceCase));
+
 //        List<String> onlyNumberCase = Arrays.asList("2-2", "해산물파스타-3", "레드와인-1");
 //        assertThrows(IllegalArgumentException.class, () -> OrderListForm.validateForm(onlyNumberCase));
         //TODO "2-2" : 위 케이스는 어차피 Menu 클래스에서 검증 될 것

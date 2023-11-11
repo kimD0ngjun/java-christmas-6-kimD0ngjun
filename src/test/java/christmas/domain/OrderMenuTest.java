@@ -19,6 +19,7 @@ public class OrderMenuTest {
     void invalidOrderMenu() {
         assertThrows(IllegalArgumentException.class, () -> new OrderMenu("방어회"));
         assertThrows(IllegalArgumentException.class, () -> new OrderMenu("123"));
+        assertThrows(IllegalArgumentException.class, () -> new OrderMenu("-,."));
         assertThrows(IllegalArgumentException.class, () -> new OrderMenu(""));
     }
 

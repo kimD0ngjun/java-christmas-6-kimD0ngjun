@@ -34,7 +34,7 @@ public class OrderListForm {
 
     //공백이나 빈값 허용 x
     private static boolean isValidString(String str) {
-        return str != null && !str.isEmpty();
+        return str != null && !str.isBlank();
     }
 
     // 수량이 제대로 입력됐는지, 양의 정수인지는 OrderQuantity 클래스에서 정적 메소드로 작성해서 여기로 들고오는 식으로 리팩토링?
