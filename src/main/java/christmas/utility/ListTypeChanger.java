@@ -20,14 +20,9 @@ public class ListTypeChanger {
     }
 
     private static void validateOrderElement(String orderElement) {
-        if (!validateNull(orderElement) || !validateEmpty(orderElement) || !validateDash(orderElement)) {
+        if (!validateEmpty(orderElement) || !validateDash(orderElement)) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_ORDER.getMessage());
         }
-    }
-
-    // null 검증
-    private static boolean validateNull(String orderElement) {
-        return orderElement != null;
     }
 
     // 빈 문자열 검증

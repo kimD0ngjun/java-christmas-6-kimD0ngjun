@@ -14,15 +14,6 @@ public class ListTypeChangerTest {
         assertDoesNotThrow(() -> ListTypeChanger.changeListType(input));
     }
 
-    @DisplayName("입력값이 null이면 예외가 발생한다.")
-    @Test
-    public void changeListType_NullInput_ThrowsIllegalArgumentException() {
-        String input = null;
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> ListTypeChanger.changeListType(input));
-        assertEquals(ErrorMessage.WRONG_ORDER.getMessage(), exception.getMessage());
-    }
-
     @DisplayName("입력값이 빈 문자열이면 예외가 발생한다.")
     @Test
     public void changeListType_EmptyInput_ThrowsIllegalArgumentException() {
