@@ -34,5 +34,4 @@ public class ListTypeChanger {
     private static boolean validateDash(String orderElement) {
         return !orderElement.startsWith("-") && !orderElement.endsWith("-");
     }
-
 }

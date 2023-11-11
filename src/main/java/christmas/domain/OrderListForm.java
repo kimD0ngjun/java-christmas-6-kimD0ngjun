@@ -1,7 +1,10 @@
 package christmas.domain;
 
 import christmas.message.ErrorMessage;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // 바로 Map화를 시켜도 되나... 그 과정에서 유효성 검증을 수행할 수 있으려나....
 // 어차피 메뉴명 옳은지 여부는 OrderMenu 클래스에서 수행하고 있잖아.
@@ -11,11 +14,11 @@ import java.util.List;
 
 // 주문서 양식
 public class OrderListForm {
-    private List<String> orderListForm;
+    private List<Map<OrderMenu, Integer>> orderMapList;
 
     public OrderListForm(List<String> orderListForm) {
         validateForm(orderListForm);
-        this.orderListForm = orderListForm;
+        this.orderMapList = convertToOrderMapList(orderListForm);
     }
 
     public static void validateForm(List<String> orderListForm) {
@@ -45,5 +48,30 @@ public class OrderListForm {
         } catch (NumberFormatException e) {
             return false; // 숫자로 변환할 수 없는 경우
         }
+    }
+
+    // Map들 모아서 List화시키기
+    private List<Map<OrderMenu, Integer>> convertToOrderMapList(List<String> orderListForm) {
+        List<Map<OrderMenu, Integer>> result = new ArrayList<>();
+
+        for (String order : orderListForm) {
+            result.add(convertToOrderMap(order));
+        }
+
+        return result;
+    }
+
+    // 각각 요소들 Map화시키기
+    private Map<OrderMenu, Integer> convertToOrderMap(String order) {
+        String[] parts = order.split("-");
+        String menuName = parts[0];
+        int quantity = Integer.parseInt(parts[1]);
+
+        OrderMenu orderMenu = new OrderMenu(menuName);
+
+        Map<OrderMenu, Integer> orderMap = new HashMap<>();
+        orderMap.put(orderMenu, quantity);
+
+        return orderMap;
     }
 }
