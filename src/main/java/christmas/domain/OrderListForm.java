@@ -9,16 +9,17 @@ import java.util.List;
 // 근데 Map화 시킬 때 제네릭에 지정된 데이터 타입 안 들어가면 컴파일 예외 발생하지 않나
 // IllegalArgumentException는 런타임 예외인데 흠....
 
-public class OrderList {
-    private List<String> orderList;
+// 주문서 양식
+public class OrderListForm {
+    private List<String> orderListForm;
 
-    public OrderList(List<String> orderList) {
-        validateOrderList(orderList);
-        this.orderList = orderList;
+    public OrderListForm(List<String> orderListForm) {
+        validateForm(orderListForm);
+        this.orderListForm = orderListForm;
     }
 
-    public static void validateOrderList(List<String> orderList) {
-        for (String order : orderList) {
+    public static void validateForm(List<String> orderListForm) {
+        for (String order : orderListForm) {
             if (!isValidOrderFormat(order)) {
                 throw new IllegalArgumentException(ErrorMessage.WRONG_ORDER.getMessage());
             }
@@ -39,8 +40,8 @@ public class OrderList {
     // 수량이 제대로 입력됐는지, 양의 정수인지는 OrderQuantity 클래스에서 정적 메소드로 작성해서 여기로 들고오는 식으로 리팩토링?
     private static boolean isValidNumber(String str) {
         try {
-            int number = Integer.parseInt(str);
-            return number >= 0; // 음수가 아닌지 확인
+            int quantity = Integer.parseInt(str);
+            return quantity > 0; // 음수 혹은 0이 아닌지 확인
         } catch (NumberFormatException e) {
             return false; // 숫자로 변환할 수 없는 경우
         }
