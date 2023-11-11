@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class OrderListFormTest {
+public class OrderListTest {
     @DisplayName("옳게 입력된 주문 정보 단위는 -를 기준으로 메뉴명과 수량이 적힌다.")
     @Test
     public void validateOrderListForm_ValidData_NoExceptionThrown() {
