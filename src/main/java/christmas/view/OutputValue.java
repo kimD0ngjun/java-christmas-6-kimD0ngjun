@@ -36,5 +36,13 @@ public class OutputValue {
         System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(totalPrice));
     }
 
-
+    // 증정 메뉴 가이드
+    public static void guidePresent(int totalPrice) {
+        if (totalPrice >= 120_000) {
+            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("샴페인 1개"));
+        }
+        if (totalPrice < 120_000) {
+            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
+        }
+    }
 }
