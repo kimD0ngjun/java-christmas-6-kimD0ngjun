@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.OrderDate;
 import christmas.domain.OrderList;
 import christmas.message.OutputMessage;
+import christmas.service.OrderCalculator;
 import christmas.utility.ListTypeChanger;
 import christmas.utility.NumberTypeChanger;
 import christmas.view.InputValue;
@@ -16,7 +17,8 @@ public class ChristmasController {
         System.out.println(OutputMessage.WELCOME.getMessage());
         orderDate = getInputDate();
         orderList = getInputOrderList();
-        System.out.println(orderList.getOrderPrice());
+        OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
+        System.out.println(calculator.getPrice());
     }
 
     private OrderDate getInputDate() {

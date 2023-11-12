@@ -13,6 +13,10 @@ public class OrderDate {
         this.date = date;
     }
 
+    public int getDate() {
+        return date;
+    }
+
     // 올바른 날짜 검증
     private void validateDate(int date) throws IllegalArgumentException {
         if (date > Date.MAX_DATE.getDate() || date < Date.MIN_DATE.getDate()) {
