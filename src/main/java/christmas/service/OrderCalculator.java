@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class OrderCalculator {
     private final int WEEK_DISCOUNT = -2_023;
+    private final int SPECIAL_DISCOUNT = -1_000;
 
     private int price;
 
@@ -37,7 +38,7 @@ public class OrderCalculator {
     }
 
     // DESSERT 카테고리인 메뉴 갯수 세기
-    private static int countDessertMenus(List<OrderMenu> orderList) {
+    private int countDessertMenus(List<OrderMenu> orderList) {
         int dessertCount = 0;
         for (OrderMenu orderMenu : orderList) {
             if (orderMenu.getCategory() == Menu.Category.DESSERT) {
@@ -48,7 +49,7 @@ public class OrderCalculator {
     }
 
     // MAIN 카테고리인 메뉴 갯수 세기
-    private static int countMainMenus(List<OrderMenu> orderList) {
+    private int countMainMenus(List<OrderMenu> orderList) {
         int mainCount = 0;
         for (OrderMenu orderMenu : orderList) {
             if (orderMenu.getCategory() == Menu.Category.MAIN) {
@@ -57,5 +58,16 @@ public class OrderCalculator {
         }
         return mainCount;
     }
+
+    //TODO: 특별 할인 금액
+    public int discountSpecial(int orderDate) {
+        OrderDate date = new OrderDate(orderDate);
+        if (date.isSpecialDiscount()) {
+            return SPECIAL_DISCOUNT;
+        }
+        return 0;
+    }
+
+    //
 }
 
