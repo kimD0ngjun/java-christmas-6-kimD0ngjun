@@ -2,7 +2,6 @@ package christmas.service;
 
 import christmas.domain.OrderDate;
 import christmas.domain.OrderList;
-import christmas.domain.OrderMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -32,7 +31,7 @@ public class OrderCalculatorTest {
 
         OrderCalculator expectedPrice = new OrderCalculator(orderList, orderDate);
 
-        assertEquals(276_554, expectedPrice.getPrice());
+        assertEquals(276_554, expectedPrice.getExpectedPrice());
     }
 
     @DisplayName("총주문 금액이 10_000원 미만이면 어떤 이벤트도 적용되지 않는다.")

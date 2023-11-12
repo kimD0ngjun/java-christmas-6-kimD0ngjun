@@ -9,18 +9,43 @@ public class OrderCalculator {
     private final int SPECIAL_DISCOUNT = 1_000;
     private final int X_MAS_DISCOUNT = 100;
 
-    private int price;
+    private final int totalPrice;
+    private final int weekDiscountPrice;
+    private final int xMasDiscountPrice;
+    private final int specialDiscountPrice;
+    private final int expectedPrice;
+
 
     public OrderCalculator(OrderList orderList, OrderDate orderDate) {
-        this.price = calculateExpectedPrice(orderList, orderDate);
+        this.totalPrice = calculateTotalPrice(orderList);
+        this.weekDiscountPrice = discountWeek(orderList, orderDate);
+        this.xMasDiscountPrice = discountXMas(orderDate);
+        this.specialDiscountPrice = discountSpecial(orderDate);
+        this.expectedPrice = calculateExpectedPrice(orderList, orderDate);
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public int getWeekDiscountPrice() {
+        return weekDiscountPrice;
+    }
+
+    public int getXMasDiscountPrice() {
+        return xMasDiscountPrice;
+    }
+
+    public int getSpecialDiscountPrice() {
+        return specialDiscountPrice;
+    }
+
+    public int getExpectedPrice() {
+        return expectedPrice;
     }
 
     // 총 주문 금액
-    public int calculateTotalPrice(OrderList orderList) {
+    public static int calculateTotalPrice(OrderList orderList) {
         int totalPrice = 0;
         for (OrderMenu orderMenu : orderList.getOrderList()) {
             totalPrice += orderMenu.getTotalPrice();
