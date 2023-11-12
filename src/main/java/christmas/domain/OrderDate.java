@@ -5,15 +5,6 @@ import java.util.Calendar;
 import java.util.Set;
 
 public class OrderDate {
-//    // 상수로 날짜 범위 정의(enum)으로 분류하기?
-//    private final int MIN_DATE = 1;
-//    private final int MAX_DATE = 31;
-//    // 크리스마스 디데이 이벤트
-//    private final int DDAY_MAX_DATE = 25;
-//    // 특별 할인 이벤트
-//    private final int[] SPECIAL_DISCOUNT = {3, 10, 17, 24, 25, 31};
-//    // 평일, 주말 할인 판별을 위한 연도
-//    private final int YEAR = 2023;
 
     private final int date;
 

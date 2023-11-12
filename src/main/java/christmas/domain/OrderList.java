@@ -14,7 +14,6 @@ public class OrderList {
         List<OrderMenu> form = OrderFormParser.parseOrderForm(orderListForm);
         validateValue(form);
         this.orderList = form;
-        this.orderPrice = OrderCalculator.calculateTotalPrice(form);
     }
 
     // 주문 총 금액 계산

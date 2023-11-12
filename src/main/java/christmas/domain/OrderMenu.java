@@ -23,4 +23,9 @@ public class OrderMenu {
         return orderMenu.getPrice() * quantity;
     }
 
+    // 주문 메뉴의 카테고리 반환
+    public Menu.Category getCategory() {
+        return orderMenu.getCategory();
+    }
+
 }
