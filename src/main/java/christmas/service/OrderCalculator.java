@@ -9,11 +9,12 @@ import java.util.Objects;
 public class OrderCalculator {
     private final int WEEK_DISCOUNT = -2_023;
     private final int SPECIAL_DISCOUNT = -1_000;
+    private final int X_MAS_DISCOUNT = -100;
 
     private int price;
 
     public OrderCalculator(List<OrderMenu> orderList, int orderDate) {
-//        this.price = price;
+        this.price = calculateExpectedPrice(orderList, orderDate);
     }
 
     //TODO: 총주문 금액
@@ -23,6 +24,14 @@ public class OrderCalculator {
             totalPrice += orderMenu.getTotalPrice();
         }
         return totalPrice;
+    }
+
+    //TODO: 예상 결제 금액
+    public int calculateExpectedPrice(List<OrderMenu> orderList, int orderDate) {
+        int totalPrice = calculateTotalPrice(orderList);
+        int discountPrice =
+                discountWeek(orderList, orderDate) + discountSpecial(orderDate) + discountXMas(orderDate);
+        return totalPrice - discountPrice;
     }
 
     //TODO: 주일 할인 금액
@@ -68,6 +77,13 @@ public class OrderCalculator {
         return 0;
     }
 
-    //
+    //TODO: 크리스마스 할인 금액
+    public int discountXMas(int orderDate) {
+        OrderDate date = new OrderDate(orderDate);
+        if (date.isChristmasDDay()) {
+            return X_MAS_DISCOUNT * (orderDate - 1) - 1_000;
+        }
+        return 0;
+    }
 }
 
