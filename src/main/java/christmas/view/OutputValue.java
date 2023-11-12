@@ -31,17 +31,16 @@ public class OutputValue {
     }
 
     // 총주문 금액 가이드
-    public static void guideTotalPrice(int price) {
-        String totalPrice = formatNumber(price);
-        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(totalPrice));
+    public static void guideTotalPrice(OrderCalculator result) {
+        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(formatNumber(result.getTotalPrice())));
     }
 
     // 증정 메뉴 가이드
-    public static void guidePresent(int totalPrice) {
-        if (totalPrice >= 120_000) {
+    public static void guidePresent(OrderCalculator result) {
+        if (result.getTotalPrice() >= 120_000) {
             System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("샴페인 1개"));
         }
-        if (totalPrice < 120_000) {
+        if (result.getTotalPrice() < 120_000) {
             System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
         }
     }
@@ -95,5 +94,8 @@ public class OutputValue {
         return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
     }
 
-
+    // 할인 후 예상 결제 금액 가이드
+    public static void guideExpectedPrice(OrderCalculator result) {
+        System.out.printf("%s%n", OutputMessage.EXPECTED_PRICE.getMessage(formatNumber(result.getExpectedPrice())));
+    }
 }

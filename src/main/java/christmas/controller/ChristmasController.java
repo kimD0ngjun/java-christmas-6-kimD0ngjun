@@ -21,11 +21,11 @@ public class ChristmasController {
         OutputValue.guideEvent(orderDate);
         OutputValue.guideOrderMenu(orderList);
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
-        OutputValue.guideTotalPrice(calculator.getTotalPrice());
-        OutputValue.guidePresent(calculator.getTotalPrice());
+        OutputValue.guideTotalPrice(calculator);
+        OutputValue.guidePresent(calculator);
         OutputValue.guideBenefits(calculator, orderDate);
         OutputValue.guideTotalBenefits(calculator);
-        System.out.println(calculator.getExpectedPrice());
+        OutputValue.guideExpectedPrice(calculator);
     }
 
     private OrderDate getInputDate() {
