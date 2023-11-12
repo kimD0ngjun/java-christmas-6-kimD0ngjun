@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 
 public class OutputValue {
     // int 포맷팅 메소드
-    private static String formatNumberWithCommas(int number) {
+    private static String formatNumber(int number) {
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
         return decimalFormat.format(number);
     }
@@ -32,7 +32,7 @@ public class OutputValue {
 
     // 총주문 금액 가이드
     public static void guideTotalPrice(int price) {
-        String totalPrice = formatNumberWithCommas(price);
+        String totalPrice = formatNumber(price);
         System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(totalPrice));
     }
 
@@ -63,13 +63,9 @@ public class OutputValue {
         }
     }
 
-    private static int getTotalDiscount(OrderCalculator result) {
-        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
-    }
-
     private static void printDiscount(OutputMessage message, int discountPrice) {
         if (discountPrice > 0) {
-            System.out.printf("%s%n", message.getMessage(formatNumberWithCommas(discountPrice)));
+            System.out.printf("%s%n", message.getMessage(formatNumber(discountPrice)));
         }
     }
 
@@ -79,4 +75,25 @@ public class OutputValue {
         }
         return OutputMessage.WEEKEND_DISCOUNT;
     }
+
+    // 총혜택 금액 가이드
+    public static void guideTotalBenefits(OrderCalculator result) {
+        if (result.getTotalPrice() < 10_000) {
+            System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(0)));
+        }
+        if (result.getTotalPrice() < 120_000 && result.getTotalPrice() >= 10_000) {
+            System.out.printf(
+                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(-getTotalDiscount(result))));
+        }
+        if (result.getTotalPrice() >= 120_000) {
+            int totalBenefit = getTotalDiscount(result) + 25_000;
+            System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(-totalBenefit)));
+        }
+    }
+
+    private static int getTotalDiscount(OrderCalculator result) {
+        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
+    }
+
+
 }
