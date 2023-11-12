@@ -20,6 +20,7 @@ public class ChristmasController {
         orderList = getInputOrderList();
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         OutputValue.guideEvent(orderDate);
+        OutputValue.guideOrderMenu(orderList);
         System.out.println(calculator.getPrice());
     }
 

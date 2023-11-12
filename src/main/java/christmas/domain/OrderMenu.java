@@ -13,6 +13,10 @@ public class OrderMenu {
         return orderMenu;
     }
 
+    public String getMenuName() {
+        return orderMenu.getName();
+    }
+
     // 주문 메뉴의 수량 반환
     public int getQuantity() {
         return quantity;
