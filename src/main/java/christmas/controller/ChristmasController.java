@@ -23,6 +23,7 @@ public class ChristmasController {
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         OutputValue.guideTotalPrice(calculator.getTotalPrice());
         OutputValue.guidePresent(calculator.getTotalPrice());
+        OutputValue.guideBenefits(calculator, orderDate);
         System.out.println(calculator.getExpectedPrice());
     }
 

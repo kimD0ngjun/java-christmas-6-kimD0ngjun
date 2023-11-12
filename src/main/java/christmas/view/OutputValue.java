@@ -45,4 +45,38 @@ public class OutputValue {
             System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
         }
     }
+
+    // 혜택 내역 가이드
+    public static void guideBenefits(OrderCalculator result, OrderDate date) {
+        System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
+
+        if (result.getTotalPrice() < 10_000) {
+            System.out.println("없음");
+        }
+        if (result.getTotalPrice() >= 10_000) {
+            printDiscount(OutputMessage.X_MAS_DISCOUNT, result.getXMasDiscountPrice());
+            printDiscount(getWeekDiscountMessage(date), result.getWeekDiscountPrice());
+            printDiscount(OutputMessage.SPECIAL_DISCOUNT, result.getSpecialDiscountPrice());
+        }
+        if (result.getTotalPrice() >= 120_000) {
+            System.out.println(OutputMessage.PRESENT_EVENT.getMessage());
+        }
+    }
+
+    private static int getTotalDiscount(OrderCalculator result) {
+        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
+    }
+
+    private static void printDiscount(OutputMessage message, int discountPrice) {
+        if (discountPrice > 0) {
+            System.out.printf("%s%n", message.getMessage(formatNumberWithCommas(discountPrice)));
+        }
+    }
+
+    private static OutputMessage getWeekDiscountMessage(OrderDate date) {
+        if ("weekDay".equals(date.getDayOfWeek())) {
+            return OutputMessage.WEEKDAY_DISCOUNT;
+        }
+        return OutputMessage.WEEKEND_DISCOUNT;
+    }
 }

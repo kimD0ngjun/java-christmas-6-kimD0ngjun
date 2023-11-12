@@ -7,12 +7,12 @@ public enum OutputMessage {
     ORDER_MENU_INFO("%s %d개"),
     TOTAL_PRICE("\n<할인 전 총주문 금액>\n%s원"),
     PRESENT("\n<증정 메뉴>\n%s"),
-    BENEFITS_GUIDE("\n<혜택 내역>\n"),
+    BENEFITS_GUIDE("\n<혜택 내역>"),
     X_MAS_DISCOUNT("크리스마스 디데이 할인: -%s원"),
     WEEKDAY_DISCOUNT("평일 할인 : -%s원"),
     WEEKEND_DISCOUNT("주말 할인 : -%s원"),
     SPECIAL_DISCOUNT("특별 할인 : -%s원"),
-    PRESENT_EVENT("증정 이벤트: -25,000원")
+    PRESENT_EVENT("증정 이벤트 : -25,000원")
     ;
 
     private final String message;
