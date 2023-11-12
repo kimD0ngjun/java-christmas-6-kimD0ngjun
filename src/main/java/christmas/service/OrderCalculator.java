@@ -51,7 +51,7 @@ public class OrderCalculator {
     // 크리스마스 할인 금액
     public int discountXMas(OrderDate orderDate) {
         if (orderDate.isChristmasDDay()) {
-            return X_MAS_DISCOUNT * (orderDate.getDate() - 1) - 1_000;
+            return X_MAS_DISCOUNT * (orderDate.getDate() - 1) + 1_000;
         }
         return 0;
     }
