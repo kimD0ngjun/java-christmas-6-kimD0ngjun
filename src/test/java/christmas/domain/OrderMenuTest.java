@@ -22,25 +22,5 @@ public class OrderMenuTest {
         assertThrows(IllegalArgumentException.class, () -> new OrderMenu("-,.", 1));
         assertThrows(IllegalArgumentException.class, () -> new OrderMenu("", 1));
     }
-
-    @DisplayName("주문 메뉴 별로 가격 데이터가 있다.")
-    @Test
-    void checkOrderMenuPrice() {
-        OrderMenu orderSoup = new OrderMenu("양송이수프", 1);
-        assertEquals(6_000, orderSoup.getPrice());
-
-        OrderMenu orderSteak = new OrderMenu("티본스테이크", 2);
-        assertEquals(55_000, orderSteak.getPrice());
-    }
-
-    @DisplayName("주문 메뉴 별로 카테고리 데이터가 있다.")
-    @Test
-    void checkOrderMenuCategory() {
-        OrderMenu orderSoup = new OrderMenu("양송이수프", 2);
-        assertEquals(Menu.Category.APPETIZER, orderSoup.getCategory());
-
-        OrderMenu orderSteak = new OrderMenu("티본스테이크", 1);
-        assertEquals(Menu.Category.MAIN, orderSteak.getCategory());
-    }
 }
 

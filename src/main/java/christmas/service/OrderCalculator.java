@@ -4,12 +4,12 @@ import christmas.domain.OrderMenu;
 import java.util.List;
 
 public class OrderCalculator {
-    public static int calculateTotalOrderAmount(List<OrderMenu> orderList) {
-        int totalAmount = 0;
+    public static int calculateTotalPrice(List<OrderMenu> orderList) {
+        int totalPrice = 0;
         for (OrderMenu orderMenu : orderList) {
-            totalAmount += orderMenu.getTotalPrice();
+            totalPrice += orderMenu.getTotalPrice();
         }
-        return totalAmount;
+        return totalPrice;
     }
 }
 
