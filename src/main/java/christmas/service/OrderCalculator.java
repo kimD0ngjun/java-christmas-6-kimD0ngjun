@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.domain.OrderDate;
 import christmas.domain.OrderList;
+import christmas.domain.OrderMenu;
 
 public class OrderCalculator {
     private final int WEEK_DISCOUNT = 2_023;
@@ -18,9 +19,18 @@ public class OrderCalculator {
         return price;
     }
 
+    // 총 주문 금액
+    public int calculateTotalPrice(OrderList orderList) {
+        int totalPrice = 0;
+        for (OrderMenu orderMenu : orderList.getOrderList()) {
+            totalPrice += orderMenu.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
     // 예상 결제 금액
     public int calculateExpectedPrice(OrderList orderList, OrderDate orderDate) {
-        int totalPrice = orderList.getOrderPrice();
+        int totalPrice = calculateTotalPrice(orderList);
         int discountPrice =
                 discountWeek(orderList, orderDate) + discountSpecial(orderDate) + discountXMas(orderDate);
         if (totalPrice >= 10_000) {

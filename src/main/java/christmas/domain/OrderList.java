@@ -7,28 +7,26 @@ import java.util.List;
 
 // 주문서 양식
 public class OrderList {
-    private List<OrderMenu> orderList;
-    private int orderPrice;
+    private final List<OrderMenu> orderList;
 
     public OrderList(List<String> orderListForm) {
         validateForm(orderListForm);
         List<OrderMenu> form = OrderFormParser.parseOrderForm(orderListForm);
         validateValue(form);
         this.orderList = form;
-        this.orderPrice = calculateOrderPrice();
     }
 
     // 총 주문 가격 계산
-    private int calculateOrderPrice() {
-        int totalPrice = 0;
-        for (OrderMenu orderMenu : orderList) {
-            totalPrice += orderMenu.getTotalPrice();
-        }
-        return totalPrice;
-    }
+//    private int calculateOrderPrice() {
+//        int totalPrice = 0;
+//        for (OrderMenu orderMenu : orderList) {
+//            totalPrice += orderMenu.getTotalPrice();
+//        }
+//        return totalPrice;
+//    }
 
-    public int getOrderPrice() {
-        return orderPrice;
+    public List<OrderMenu> getOrderList() {
+        return orderList;
     }
 
     // DESSERT 카테고리인 메뉴 갯수 세기(주중 할인)

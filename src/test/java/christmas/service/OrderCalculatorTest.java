@@ -11,21 +11,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderCalculatorTest {
 
-    @DisplayName("예상 결제 금액은 총주문 금액에서 할인 혜택 금액을 뺀 값이다.")
+    @DisplayName("총주문 금액은 할인 적용 이전의 합산 값이다.")
     @Test
     public void calculateTotalPriceTest() {
         List<String> orderListForm = Arrays.asList("티본스테이크-2", "해산물파스타-3", "레드와인-1", "아이스크림-2");
         OrderList orderList = new OrderList(orderListForm);
         OrderDate orderDate = new OrderDate(25);
 
-        OrderCalculator price = new OrderCalculator(orderList, orderDate);
+        OrderCalculator totalPrice = new OrderCalculator(orderList, orderDate);
 
-        assertEquals(276_554, price.getPrice());
+        assertEquals(285_000, totalPrice.calculateTotalPrice(orderList));
+    }
+
+    @DisplayName("예상 결제 금액은 총주문 금액에서 할인 혜택 금액을 뺀 값이다.")
+    @Test
+    public void calculateExpectedPriceTest() {
+        List<String> orderListForm = Arrays.asList("티본스테이크-2", "해산물파스타-3", "레드와인-1", "아이스크림-2");
+        OrderList orderList = new OrderList(orderListForm);
+        OrderDate orderDate = new OrderDate(25);
+
+        OrderCalculator expectedPrice = new OrderCalculator(orderList, orderDate);
+
+        assertEquals(276_554, expectedPrice.getPrice());
     }
 
     @DisplayName("총주문 금액이 10_000원 미만이면 어떤 이벤트도 적용되지 않는다.")
     @Test
-    public void calculateExpectedPriceTest() {
+    public void eventConditionTest() {
         List<String> orderListForm1 = Arrays.asList("아이스크림-1");
         OrderList orderList1 = new OrderList(orderListForm1);
 
