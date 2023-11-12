@@ -36,7 +36,7 @@ public class OrderList {
         int dessertCount = 0;
         for (OrderMenu orderMenu : orderList) {
             if (orderMenu.getCategory() == Menu.Category.DESSERT) {
-                dessertCount++;
+                dessertCount += orderMenu.getQuantity();
             }
         }
         return dessertCount;
@@ -47,7 +47,7 @@ public class OrderList {
         int mainCount = 0;
         for (OrderMenu orderMenu : orderList) {
             if (orderMenu.getCategory() == Menu.Category.MAIN) {
-                mainCount++;
+                mainCount += orderMenu.getQuantity();
             }
         }
         return mainCount;
