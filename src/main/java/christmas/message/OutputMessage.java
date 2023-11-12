@@ -14,8 +14,8 @@ public enum OutputMessage {
     SPECIAL_DISCOUNT("특별 할인 : -%s원"),
     PRESENT_EVENT("증정 이벤트 : -25,000원"),
     TOTAL_BENEFITS("\n<총혜택 금액>\n%s원"),
-    EXPECTED_PRICE("\n<할인 후 예상 결제 금액>\n%s원")
-    ;
+    EXPECTED_PRICE("\n<할인 후 예상 결제 금액>\n%s원"),
+    BADGE("\n<12월 이벤트 배지>\n%s");
 
     private final String message;
 

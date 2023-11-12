@@ -26,6 +26,7 @@ public class ChristmasController {
         OutputValue.guideBenefits(calculator, orderDate);
         OutputValue.guideTotalBenefits(calculator);
         OutputValue.guideExpectedPrice(calculator);
+        OutputValue.guideBadge(calculator);
     }
 
     private OrderDate getInputDate() {

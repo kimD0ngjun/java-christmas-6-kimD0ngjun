@@ -98,4 +98,25 @@ public class OutputValue {
     public static void guideExpectedPrice(OrderCalculator result) {
         System.out.printf("%s%n", OutputMessage.EXPECTED_PRICE.getMessage(formatNumber(result.getExpectedPrice())));
     }
+
+    // 배지 부여 가이드
+    public static void guideBadge(OrderCalculator result) {
+        if (result.getTotalPrice() < 10_000) {
+            System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
+        }
+        if (result.getTotalPrice() >= 10_000) {
+            if (getTotalDiscount(result) < 5_000) {
+                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
+            }
+            if (getTotalDiscount(result) >= 5_000 && getTotalDiscount(result) < 10_000) {
+                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("별"));
+            }
+            if (getTotalDiscount(result) >= 10_000 && getTotalDiscount(result) < 20_000) {
+                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("트리"));
+            }
+            if (getTotalDiscount(result) >= 20_000) {
+                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("산타"));
+            }
+        }
+    }
 }
