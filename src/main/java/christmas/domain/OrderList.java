@@ -1,17 +1,25 @@
 package christmas.domain;
 
 import christmas.message.ErrorMessage;
+import christmas.service.OrderCalculator;
 import java.util.List;
 
 // 주문서 양식
 public class OrderList {
     private List<OrderMenu> orderList;
+    private int orderPrice;
 
     public OrderList(List<String> orderListForm) {
         validateForm(orderListForm);
         List<OrderMenu> form = OrderFormParser.parseOrderForm(orderListForm);
         validateValue(form);
         this.orderList = form;
+        this.orderPrice = OrderCalculator.calculateTotalOrderAmount(form);
+    }
+
+    // 주문 총 금액 계산
+    public int getOrderPrice() {
+        return orderPrice;
     }
 
     // 입력값 유효성 검증하는 메소드

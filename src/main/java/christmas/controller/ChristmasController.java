@@ -16,6 +16,7 @@ public class ChristmasController {
         System.out.println(OutputMessage.WELCOME.getMessage());
         orderDate = getInputDate();
         orderList = getInputOrderList();
+        System.out.println(orderList.getOrderPrice());
     }
 
     private OrderDate getInputDate() {

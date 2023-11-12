@@ -4,7 +4,7 @@ import christmas.message.ErrorMessage;
 import java.util.Calendar;
 
 public class OrderDate {
-    // 상수로 날짜 범위 정의
+    // 상수로 날짜 범위 정의(enum)으로 분류하기?
     private final int MIN_DATE = 1;
     private final int MAX_DATE = 31;
     // 크리스마스 디데이 이벤트
