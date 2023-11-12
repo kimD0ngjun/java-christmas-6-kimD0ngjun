@@ -10,10 +10,15 @@ public class OrderList {
     public OrderList(List<String> orderListForm) {
         validateForm(orderListForm);
         List<OrderMenu> form = OrderFormParser.parseOrderForm(orderListForm);
+        validateValue(form);
+        this.orderList = form;
+    }
+
+    // 입력값 유효성 검증하는 메소드
+    private static void validateValue(List<OrderMenu> form) {
         OrderValueValidator.hasDuplicateMenus(form);
         OrderValueValidator.isTotalQuantityValid(form);
         OrderValueValidator.validateBeverageOnlyCategory(form);
-        this.orderList = form;
     }
 
     // 입력 양식 유효성 검증하는 메소드
