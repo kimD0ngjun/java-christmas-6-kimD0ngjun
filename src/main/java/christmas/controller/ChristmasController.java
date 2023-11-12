@@ -7,6 +7,7 @@ import christmas.service.OrderCalculator;
 import christmas.utility.ListTypeChanger;
 import christmas.utility.NumberTypeChanger;
 import christmas.view.InputValue;
+import christmas.view.OutputValue;
 import java.util.List;
 
 public class ChristmasController {
@@ -18,6 +19,7 @@ public class ChristmasController {
         orderDate = getInputDate();
         orderList = getInputOrderList();
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
+        OutputValue.guideEvent(orderDate);
         System.out.println(calculator.getPrice());
     }
 
