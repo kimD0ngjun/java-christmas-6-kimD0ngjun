@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.utility;
 
 import christmas.domain.menu.OrderMenu;
 import christmas.utility.OrderValueValidator;

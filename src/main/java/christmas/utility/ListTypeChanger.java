@@ -7,10 +7,17 @@ import java.util.List;
 
 public class ListTypeChanger {
     public static List<String> changeListType(String input) {
+        verifyComma(input);
         String[] orderUnit = input.split(",");
         List<String> orderList = new ArrayList<>(Arrays.asList(orderUnit));
         validateOrderList(orderList);
         return orderList;
+    }
+
+    private static void verifyComma(String input) {
+        if (input.endsWith(",")) {
+            throw new IllegalArgumentException(ErrorMessage.WRONG_ORDER.getMessage());
+        }
     }
 
     private static void validateOrderList(List<String> orderList) {

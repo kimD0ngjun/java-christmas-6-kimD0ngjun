@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.price;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
