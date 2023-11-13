@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.domain.benefits.Present;
 import christmas.domain.benefits.SimplePresent;
 import christmas.domain.date.OrderDate;
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.badge.GiveBadgeProvider;
 import christmas.domain.badge.SimpleGiveBadgeProvider;
 import christmas.domain.benefits.Discount;

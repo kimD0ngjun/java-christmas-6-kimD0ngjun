@@ -2,7 +2,7 @@ package christmas.service;
 
 import christmas.domain.OrderCalculator;
 import christmas.domain.date.OrderDate;
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.benefits.Discount;
 import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.WeekDiscount;

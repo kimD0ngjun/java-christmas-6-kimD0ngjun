@@ -2,8 +2,7 @@ package christmas.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.domain.OrderMenu;
-import christmas.service.OrderFormParser;
+import christmas.domain.menu.OrderMenu;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;

@@ -2,7 +2,7 @@ package christmas.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.benefits.Discount;
 import christmas.domain.benefits.Present;
 import christmas.domain.benefits.SimplePresent;
@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
 public class TotalBenefitsCalculatorTest {
     @DisplayName("총혜택 금액은 할인 금액과 증정품 금액을 합한 값이다.")

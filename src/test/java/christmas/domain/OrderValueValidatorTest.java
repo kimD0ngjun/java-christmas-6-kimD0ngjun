@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.domain.menu.OrderMenu;
+import christmas.utility.OrderValueValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

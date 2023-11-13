@@ -1,7 +1,7 @@
 package christmas.domain.price;
 
-import christmas.domain.OrderList;
-import christmas.domain.OrderMenu;
+import christmas.domain.menu.OrderList;
+import christmas.domain.menu.OrderMenu;
 
 public class SimpleTotalPrice implements TotalPrice {
     @Override

@@ -1,5 +1,7 @@
-package christmas.domain;
+package christmas.utility;
 
+import christmas.domain.menu.Menu;
+import christmas.domain.menu.OrderMenu;
 import christmas.message.ErrorMessage;
 import java.util.HashSet;
 import java.util.List;

@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.date.OrderDate;
 import christmas.domain.price.TotalPrice;

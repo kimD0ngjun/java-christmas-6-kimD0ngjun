@@ -1,8 +1,8 @@
 package christmas.domain;
 
 import christmas.domain.date.OrderDate;
-import christmas.domain.OrderList;
-import christmas.domain.OrderMenu;
+import christmas.domain.menu.OrderList;
+import christmas.domain.menu.OrderMenu;
 
 public class OrderCalculator {
     private final int WEEK_DISCOUNT = 2_023;

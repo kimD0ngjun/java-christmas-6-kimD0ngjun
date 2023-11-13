@@ -2,7 +2,7 @@ package christmas.domain.benefits;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
 import java.util.Arrays;

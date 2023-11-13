@@ -1,8 +1,8 @@
 package christmas.view;
 
 import christmas.domain.date.OrderDate;
-import christmas.domain.OrderList;
-import christmas.domain.OrderMenu;
+import christmas.domain.menu.OrderList;
+import christmas.domain.menu.OrderMenu;
 import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
 import christmas.message.OutputMessage;

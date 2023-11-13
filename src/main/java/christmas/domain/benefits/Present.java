@@ -1,6 +1,6 @@
 package christmas.domain.benefits;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 
 // 총주문액과 증정 여부의 연관성 고려 의존성 주입 인터페이스
 public interface Present {

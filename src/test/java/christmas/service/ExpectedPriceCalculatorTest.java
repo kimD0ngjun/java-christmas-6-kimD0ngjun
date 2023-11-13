@@ -2,10 +2,8 @@ package christmas.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.benefits.Discount;
-import christmas.domain.benefits.Present;
-import christmas.domain.benefits.SimplePresent;
 import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.benefits.WeekDiscount;

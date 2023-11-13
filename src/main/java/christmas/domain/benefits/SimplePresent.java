@@ -1,6 +1,6 @@
 package christmas.domain.benefits;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.price.TotalPrice;
 
 public class SimplePresent implements Present {

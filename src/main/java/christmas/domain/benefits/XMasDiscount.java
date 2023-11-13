@@ -1,6 +1,6 @@
 package christmas.domain.benefits;
 
-import christmas.domain.OrderList;
+import christmas.domain.menu.OrderList;
 import christmas.domain.date.OrderDate;
 
 public class XMasDiscount implements Discount {
