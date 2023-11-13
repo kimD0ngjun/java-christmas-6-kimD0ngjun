@@ -3,6 +3,8 @@ package christmas.view;
 import christmas.domain.OrderDate;
 import christmas.domain.OrderList;
 import christmas.domain.OrderMenu;
+import christmas.domain.badge.GiveBadge;
+import christmas.domain.badge.GiveBadgeProvider;
 import christmas.message.OutputMessage;
 import christmas.service.OrderCalculator;
 import java.text.DecimalFormat;
@@ -107,23 +109,9 @@ public class OutputValue {
     }
 
     // 배지 부여 가이드
-    public static void guideBadge(OrderCalculator result) {
-        if (result.getTotalPrice() < 10_000) {
-            System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
-        }
-        if (result.getTotalPrice() >= 10_000) {
-            if (getTotalBenefits(result) < 5_000) {
-                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
-            }
-            if (getTotalBenefits(result) >= 5_000 && getTotalBenefits(result) < 10_000) {
-                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("별"));
-            }
-            if (getTotalBenefits(result) >= 10_000 && getTotalBenefits(result) < 20_000) {
-                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("트리"));
-            }
-            if (getTotalBenefits(result) >= 20_000) {
-                System.out.printf("%s%n", OutputMessage.BADGE.getMessage("산타"));
-            }
-        }
+    public static void guideBadge(OrderCalculator result, GiveBadgeProvider badgeProvider) {
+        GiveBadge badge = badgeProvider.getBadge(result.getTotalBenefits());
+
+        System.out.printf("%s%n", badge.getMessage().getMessage(badge.getBadge()));
     }
 }

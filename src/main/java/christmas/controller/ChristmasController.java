@@ -2,6 +2,8 @@ package christmas.controller;
 
 import christmas.domain.OrderDate;
 import christmas.domain.OrderList;
+import christmas.domain.badge.GiveBadgeProvider;
+import christmas.domain.badge.SimpleGiveBadgeProvider;
 import christmas.message.OutputMessage;
 import christmas.service.OrderCalculator;
 import christmas.utility.ListTypeChanger;
@@ -20,13 +22,16 @@ public class ChristmasController {
         orderList = getInputOrderList();
         OutputValue.guideEvent(orderDate);
         OutputValue.guideOrderMenu(orderList);
+
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
+        GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
+
         OutputValue.guideTotalPrice(calculator);
         OutputValue.guidePresent(calculator);
         OutputValue.guideBenefits(calculator, orderDate);
         OutputValue.guideTotalBenefits(calculator);
         OutputValue.guideExpectedPrice(calculator);
-        OutputValue.guideBadge(calculator);
+        OutputValue.guideBadge(calculator, badge);
     }
 
     private OrderDate getInputDate() {

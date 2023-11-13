@@ -14,6 +14,7 @@ public class OrderCalculator {
     private final int xMasDiscountPrice;
     private final int specialDiscountPrice;
     private final int expectedPrice;
+    private final int totalBenefits;
 
 
     public OrderCalculator(OrderList orderList, OrderDate orderDate) {
@@ -22,6 +23,7 @@ public class OrderCalculator {
         this.xMasDiscountPrice = discountXMas(orderDate);
         this.specialDiscountPrice = discountSpecial(orderDate);
         this.expectedPrice = calculateExpectedPrice(orderList, orderDate);
+        this.totalBenefits = calculateTotalBenefits(orderList, orderDate);
     }
 
     public int getTotalPrice() {
@@ -43,6 +45,11 @@ public class OrderCalculator {
     public int getExpectedPrice() {
         return expectedPrice;
     }
+
+    public int getTotalBenefits() {
+        return totalBenefits;
+    }
+
 
     // 총 주문 금액
     public static int calculateTotalPrice(OrderList orderList) {
@@ -87,6 +94,22 @@ public class OrderCalculator {
     public int discountXMas(OrderDate orderDate) {
         if (orderDate.isChristmasDDay()) {
             return X_MAS_DISCOUNT * (orderDate.getDate() - 1) + 1_000;
+        }
+        return 0;
+    }
+
+    // 총혜택 금액 계산
+    public int calculateTotalBenefits(OrderList orderList, OrderDate orderDate) {
+        int weekDiscount = discountWeek(orderList, orderDate);
+        int specialDiscount = discountSpecial(orderDate);
+        int xMasDiscount = discountXMas(orderDate);
+        if (getTotalPrice() >= 10_000) {
+            if (getTotalPrice() < 120_000) {
+                return weekDiscount + specialDiscount + xMasDiscount;
+            }
+            if (getTotalPrice() >= 120_000) {
+                return weekDiscount + specialDiscount + xMasDiscount + 25_000;
+            }
         }
         return 0;
     }

@@ -4,10 +4,10 @@ import christmas.message.OutputMessage;
 
 // 캡슐화를 위한 열거형
 public enum Badges {
-    NONE(OutputMessage.BADGE, 0, "없음"),
-    STAR(OutputMessage.BADGE, 5000, "별"),
-    TREE(OutputMessage.BADGE, 10000, "트리"),
-    SANTA(OutputMessage.BADGE, 20000, "산타");
+    NONE(OutputMessage.BADGE, 4_999, "없음"),
+    STAR(OutputMessage.BADGE, 9_999, "별"),
+    TREE(OutputMessage.BADGE, 19_999, "트리"),
+    SANTA(OutputMessage.BADGE, Integer.MAX_VALUE, "산타");
 
     private final OutputMessage message;
     private final int limitAmount;
