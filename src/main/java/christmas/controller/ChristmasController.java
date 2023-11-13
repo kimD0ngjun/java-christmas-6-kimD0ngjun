@@ -15,6 +15,7 @@ import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
 import christmas.domain.OrderCalculator;
+import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.ListTypeChanger;
 import christmas.utility.NumberTypeChanger;
 import christmas.view.InputValue;
@@ -59,6 +60,9 @@ public class ChristmasController {
 
         Present present = new SimplePresent(totalPrice);
         int isPresent = present.calculatePresent(orderList);
+
+        TotalBenefitsCalculator totalBenefitsCalculator = new TotalBenefitsCalculator(present, totalDiscount);
+        int totalBenefits = totalBenefitsCalculator.calculateTotalBenefits(orderList, orderDate);
 
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
