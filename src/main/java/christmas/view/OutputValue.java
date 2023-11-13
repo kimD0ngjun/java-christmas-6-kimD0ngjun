@@ -85,13 +85,20 @@ public class OutputValue {
                     "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(-getTotalDiscount(result))));
         }
         if (result.getTotalPrice() >= 120_000) {
-            int totalBenefit = getTotalDiscount(result) + 25_000;
-            System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(-totalBenefit)));
+            System.out.printf(
+                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(formatNumber(-getTotalBenefits(result))));
         }
     }
 
     private static int getTotalDiscount(OrderCalculator result) {
         return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
+    }
+
+    private static int getTotalBenefits(OrderCalculator result) {
+        if (result.getTotalPrice() >= 120_000) {
+            return getTotalDiscount(result) + 25_000;
+        }
+        return getTotalDiscount(result);
     }
 
     // 할인 후 예상 결제 금액 가이드
@@ -105,16 +112,16 @@ public class OutputValue {
             System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
         }
         if (result.getTotalPrice() >= 10_000) {
-            if (getTotalDiscount(result) < 5_000) {
+            if (getTotalBenefits(result) < 5_000) {
                 System.out.printf("%s%n", OutputMessage.BADGE.getMessage("없음"));
             }
-            if (getTotalDiscount(result) >= 5_000 && getTotalDiscount(result) < 10_000) {
+            if (getTotalBenefits(result) >= 5_000 && getTotalBenefits(result) < 10_000) {
                 System.out.printf("%s%n", OutputMessage.BADGE.getMessage("별"));
             }
-            if (getTotalDiscount(result) >= 10_000 && getTotalDiscount(result) < 20_000) {
+            if (getTotalBenefits(result) >= 10_000 && getTotalBenefits(result) < 20_000) {
                 System.out.printf("%s%n", OutputMessage.BADGE.getMessage("트리"));
             }
-            if (getTotalDiscount(result) >= 20_000) {
+            if (getTotalBenefits(result) >= 20_000) {
                 System.out.printf("%s%n", OutputMessage.BADGE.getMessage("산타"));
             }
         }
