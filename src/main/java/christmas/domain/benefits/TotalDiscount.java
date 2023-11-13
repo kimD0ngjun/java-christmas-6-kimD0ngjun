@@ -1,4 +1,4 @@
-package christmas.domain.discount;
+package christmas.domain.benefits;
 
 import christmas.domain.OrderList;
 import christmas.domain.date.OrderDate;
@@ -10,7 +10,7 @@ public class TotalDiscount {
     public TotalDiscount(List<Discount> discount) {
         this.discount = discount;
     }
-    public int calculateTotalBenefits(OrderList orderList, OrderDate orderDate) {
+    public int calculateTotalDiscount(OrderList orderList, OrderDate orderDate) {
         int totalBenefits = 0;
         for (Discount discountUnit : discount) {
             totalBenefits += discountUnit.calculateDiscount(orderList, orderDate);

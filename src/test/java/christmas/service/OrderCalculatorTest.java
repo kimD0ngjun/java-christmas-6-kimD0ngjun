@@ -3,10 +3,10 @@ package christmas.service;
 import christmas.domain.OrderCalculator;
 import christmas.domain.date.OrderDate;
 import christmas.domain.OrderList;
-import christmas.domain.discount.Discount;
-import christmas.domain.discount.SpecialDiscount;
-import christmas.domain.discount.WeekDiscount;
-import christmas.domain.discount.XMasDiscount;
+import christmas.domain.benefits.Discount;
+import christmas.domain.benefits.SpecialDiscount;
+import christmas.domain.benefits.WeekDiscount;
+import christmas.domain.benefits.XMasDiscount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class OrderCalculatorTest {
         OrderList orderList = new OrderList(orderListForm);
         OrderDate orderDate = new OrderDate(25);
 
-        OrderCalculator totalPrice = new OrderCalculator(orderList, orderDate, discounts);
+        OrderCalculator totalPrice = new OrderCalculator(orderList, orderDate);
 
         assertEquals(285_000, totalPrice.calculateTotalPrice(orderList));
     }
@@ -44,7 +44,7 @@ public class OrderCalculatorTest {
         OrderList orderList = new OrderList(orderListForm);
         OrderDate orderDate = new OrderDate(25);
 
-        OrderCalculator expectedPrice = new OrderCalculator(orderList, orderDate, discounts);
+        OrderCalculator expectedPrice = new OrderCalculator(orderList, orderDate);
 
         assertEquals(276_554, expectedPrice.getExpectedPrice());
     }
@@ -65,8 +65,8 @@ public class OrderCalculatorTest {
 
         OrderDate orderDate = new OrderDate(25);
 
-        OrderCalculator price1 = new OrderCalculator(orderList1, orderDate, discounts);
-        OrderCalculator price2 = new OrderCalculator(orderList2, orderDate, discounts);
+        OrderCalculator price1 = new OrderCalculator(orderList1, orderDate);
+        OrderCalculator price2 = new OrderCalculator(orderList2, orderDate);
 
         assertEquals(5_000, price1.calculateExpectedPrice(orderList1, orderDate));
         assertEquals(1_554, price2.calculateExpectedPrice(orderList2, orderDate));
@@ -86,8 +86,8 @@ public class OrderCalculatorTest {
         OrderDate weekDay = new OrderDate(7);
         OrderDate weekEndDay = new OrderDate(8);
 
-        OrderCalculator price1 = new OrderCalculator(orderList, weekDay, discounts);
-        OrderCalculator price2 = new OrderCalculator(orderList, weekEndDay, discounts);
+        OrderCalculator price1 = new OrderCalculator(orderList, weekDay);
+        OrderCalculator price2 = new OrderCalculator(orderList, weekEndDay);
 
         assertEquals(4_046, price1.discountWeek(orderList, weekDay));
         assertEquals(2_023, price2.discountWeek(orderList, weekEndDay));
@@ -107,8 +107,8 @@ public class OrderCalculatorTest {
         OrderDate specialDay = new OrderDate(25);
         OrderDate noSpecialDay = new OrderDate(26);
 
-        OrderCalculator price1 = new OrderCalculator(orderList, specialDay, discounts);
-        OrderCalculator price2 = new OrderCalculator(orderList, noSpecialDay, discounts);
+        OrderCalculator price1 = new OrderCalculator(orderList, specialDay);
+        OrderCalculator price2 = new OrderCalculator(orderList, noSpecialDay);
 
         assertEquals(1_000, price1.discountSpecial(specialDay));
         assertEquals(0, price2.discountSpecial(noSpecialDay));
@@ -128,8 +128,8 @@ public class OrderCalculatorTest {
         OrderDate xMasDay = new OrderDate(25);
         OrderDate noXMasDay = new OrderDate(26);
 
-        OrderCalculator price1 = new OrderCalculator(orderList, xMasDay, discounts);
-        OrderCalculator price2 = new OrderCalculator(orderList, noXMasDay, discounts);
+        OrderCalculator price1 = new OrderCalculator(orderList, xMasDay);
+        OrderCalculator price2 = new OrderCalculator(orderList, noXMasDay);
 
         assertEquals(3_400, price1.discountXMas(xMasDay));
         assertEquals(0, price2.discountXMas(noXMasDay));

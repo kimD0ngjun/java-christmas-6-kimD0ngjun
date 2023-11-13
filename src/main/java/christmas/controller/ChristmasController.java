@@ -4,11 +4,11 @@ import christmas.domain.date.OrderDate;
 import christmas.domain.OrderList;
 import christmas.domain.badge.GiveBadgeProvider;
 import christmas.domain.badge.SimpleGiveBadgeProvider;
-import christmas.domain.discount.Discount;
-import christmas.domain.discount.SpecialDiscount;
-import christmas.domain.discount.TotalDiscount;
-import christmas.domain.discount.WeekDiscount;
-import christmas.domain.discount.XMasDiscount;
+import christmas.domain.benefits.Discount;
+import christmas.domain.benefits.SpecialDiscount;
+import christmas.domain.benefits.TotalDiscount;
+import christmas.domain.benefits.WeekDiscount;
+import christmas.domain.benefits.XMasDiscount;
 import christmas.message.OutputMessage;
 import christmas.domain.OrderCalculator;
 import christmas.utility.ListTypeChanger;
@@ -39,7 +39,7 @@ public class ChristmasController {
         );
 
         TotalDiscount totalDiscount = new TotalDiscount(discounts);
-        int total = totalDiscount.calculateTotalBenefits(orderList, orderDate);
+        int total = totalDiscount.calculateTotalDiscount(orderList, orderDate);
 
         SpecialDiscount specialDiscount = new SpecialDiscount();
         int special = specialDiscount.calculateDiscount(orderList, orderDate);
