@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import christmas.domain.benefits.Present;
+import christmas.domain.benefits.SimplePresent;
 import christmas.domain.date.OrderDate;
 import christmas.domain.OrderList;
 import christmas.domain.badge.GiveBadgeProvider;
@@ -9,6 +11,8 @@ import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.benefits.WeekDiscount;
 import christmas.domain.benefits.XMasDiscount;
+import christmas.domain.price.SimpleTotalPrice;
+import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
 import christmas.domain.OrderCalculator;
 import christmas.utility.ListTypeChanger;
@@ -31,6 +35,9 @@ public class ChristmasController {
 
         //TODO REFACTORING
 
+        TotalPrice totalPrice = new SimpleTotalPrice();
+        int totalAmount = totalPrice.calculateTotalPrice(orderList);
+
 
         List<Discount> discounts = Arrays.asList(
                 new WeekDiscount(),
@@ -49,6 +56,9 @@ public class ChristmasController {
 
         WeekDiscount weekDiscount = new WeekDiscount();
         int week = weekDiscount.calculateDiscount(orderList, orderDate);
+
+        Present present = new SimplePresent(totalPrice);
+        int isPresent = present.calculatePresent(orderList);
 
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
