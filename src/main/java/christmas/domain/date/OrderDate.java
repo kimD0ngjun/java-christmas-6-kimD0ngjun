@@ -26,16 +26,13 @@ public class OrderDate {
 
     // TODO: 크리스마스 디데이 해당 여부
     public boolean isChristmasDDay() {
-        if (date <= Date.DDAY_MAX_DATE.getDate()) {
-            return true;
-        }
-        return false;
+        return DateChecker.isChristmasDDay(date);
     }
 
     // TODO: 특별 할인 해당 여부
     public boolean isSpecialDiscount() {
         Set<Integer> specialDiscountDates = Date.getSpecialDiscountDates();
-        return specialDiscountDates.contains(date);
+        return DateChecker.isSpecialDiscount(date, specialDiscountDates);
     }
 
     // TODO: 아직 평일 할인(일~목), 주말 할인(금, 토) 여부
@@ -45,10 +42,6 @@ public class OrderDate {
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-        if (dayOfWeek == Calendar.FRIDAY || dayOfWeek == Calendar.SATURDAY) {
-            return "weekEnd";
-        } else {
-            return "weekDay";
-        }
+        return DateChecker.getDayOfWeek(dayOfWeek);
     }
 }
