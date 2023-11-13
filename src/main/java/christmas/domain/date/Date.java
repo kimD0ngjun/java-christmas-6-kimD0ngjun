@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.date;
 
 import java.util.Arrays;
 import java.util.HashSet;

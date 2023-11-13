@@ -1,6 +1,6 @@
-package christmas.service;
+package christmas.domain;
 
-import christmas.domain.OrderDate;
+import christmas.domain.date.OrderDate;
 import christmas.domain.OrderList;
 import christmas.domain.OrderMenu;
 
