@@ -1,8 +1,7 @@
 package christmas.domain;
 
-import christmas.domain.Menu.Category;
 import christmas.message.ErrorMessage;
-import christmas.service.OrderCalculator;
+import christmas.service.OrderFormParser;
 import java.util.List;
 
 // 주문서 양식
@@ -16,19 +15,11 @@ public class OrderList {
         this.orderList = form;
     }
 
-    // 총 주문 가격 계산
-//    private int calculateOrderPrice() {
-//        int totalPrice = 0;
-//        for (OrderMenu orderMenu : orderList) {
-//            totalPrice += orderMenu.getTotalPrice();
-//        }
-//        return totalPrice;
-//    }
-
     public List<OrderMenu> getOrderList() {
         return orderList;
     }
 
+    //TODO : OrderFormValidator
     // DESSERT 카테고리인 메뉴 갯수 세기(주중 할인)
     public int countDessertMenus() {
         int dessertCount = 0;

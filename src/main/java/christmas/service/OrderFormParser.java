@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.service;
 
+import christmas.domain.OrderMenu;
 import java.util.ArrayList;
 import java.util.List;
 

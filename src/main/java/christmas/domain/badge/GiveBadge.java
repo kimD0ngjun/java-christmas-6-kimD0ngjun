@@ -1,13 +1,13 @@
-package christmas.domain;
+package christmas.domain.badge;
 
 import christmas.message.OutputMessage;
 
-public class Badge {
+public class GiveBadge {
     private final OutputMessage message;
     private final int limitAmount;
     private final String badge;
 
-    public Badge(OutputMessage message, int limitAmount, String badge) {
+    public GiveBadge(OutputMessage message, int limitAmount, String badge) {
         this.message = message;
         this.limitAmount = limitAmount;
         this.badge = badge;
