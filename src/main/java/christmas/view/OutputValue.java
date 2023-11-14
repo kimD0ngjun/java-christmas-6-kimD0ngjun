@@ -12,7 +12,6 @@ import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
 import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
-import christmas.domain.OrderCalculator;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
 import java.text.DecimalFormat;
@@ -89,13 +88,11 @@ public class OutputValue {
 
     // 총혜택 금액 가이드
     public static void guideTotalBenefits(
-            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalDiscount totalDiscount, Present present) {
+            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalDiscount totalDiscount, TotalBenefitsCalculator totalBenefit) {
 
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
         int totalDiscountAmount = totalDiscount.calculateTotalDiscount(orderList, orderDate);
-
-        TotalBenefitsCalculator benefit = new TotalBenefitsCalculator(present, totalDiscount);
-        int totalBenefitAmount = benefit.calculateTotalBenefits(orderList, orderDate);
+        int totalBenefitAmount = totalBenefit.calculateTotalBenefits(orderList, orderDate);
 
         if (totalAmount < 10_000) {
             System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(0)));
@@ -110,25 +107,16 @@ public class OutputValue {
         }
     }
 
-//    private static int getTotalDiscount(OrderCalculator result) {
-//        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
-//    }
-//
-//    private static int getTotalBenefits(OrderCalculator result) {
-//        if (result.getTotalPrice() >= 120_000) {
-//            return getTotalDiscount(result) + 25_000;
-//        }
-//        return getTotalDiscount(result);
-//    }
-
     // 할인 후 예상 결제 금액 가이드
-    public static void guideExpectedPrice(OrderCalculator result) {
-        System.out.printf("%s%n", OutputMessage.EXPECTED_PRICE.getMessage(NumberFormatter.formatNumber(result.getExpectedPrice())));
+    public static void guideExpectedPrice(int expectedPrice) {
+        System.out.printf("%s%n", OutputMessage.EXPECTED_PRICE.getMessage(NumberFormatter.formatNumber(expectedPrice)));
     }
 
     // 배지 부여 가이드
-    public static void guideBadge(OrderCalculator result, GiveBadgeProvider badgeProvider) {
-        GiveBadge badge = badgeProvider.getBadge(result.getTotalBenefits());
+    public static void guideBadge(TotalBenefitsCalculator totalBenefit, OrderList orderList, OrderDate orderDate, GiveBadgeProvider badgeProvider) {
+        int totalBenefitAmount = totalBenefit.calculateTotalBenefits(orderList, orderDate);
+
+        GiveBadge badge = badgeProvider.getBadge(totalBenefitAmount);
 
         System.out.printf("%s%n", badge.getMessage().getMessage(badge.getBadge()));
     }

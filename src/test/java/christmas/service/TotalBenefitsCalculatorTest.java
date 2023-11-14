@@ -32,7 +32,7 @@ public class TotalBenefitsCalculatorTest {
                 new XMasDiscount()
         );
 
-        TotalDiscount totalDiscount = new TotalDiscount(discount);
+        TotalDiscount totalDiscount = new TotalDiscount(discount, totalPriceCalculator);
         TotalBenefitsCalculator calculator = new TotalBenefitsCalculator(present, totalDiscount);
         int totalBenefits = calculator.calculateTotalBenefits(orderList, date);
         assertEquals(31_423, totalBenefits);

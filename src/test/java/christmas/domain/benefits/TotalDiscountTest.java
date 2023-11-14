@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import christmas.domain.menu.OrderList;
 import christmas.domain.date.OrderDate;
+import christmas.domain.price.SimpleTotalPrice;
+import christmas.domain.price.TotalPrice;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -19,13 +21,15 @@ public class TotalDiscountTest {
         OrderList orderList = new OrderList(orderListForm);
         OrderDate orderDate = new OrderDate(25);
 
+        TotalPrice totalPrice = new SimpleTotalPrice();
+
         List<Discount> discount = Arrays.asList(
                 new WeekDiscount(),
                 new SpecialDiscount(),
                 new XMasDiscount()
         );
 
-        TotalDiscount totalDiscount = new TotalDiscount(discount);
+        TotalDiscount totalDiscount = new TotalDiscount(discount, totalPrice);
 
         int result = totalDiscount.calculateTotalDiscount(orderList, orderDate);
 

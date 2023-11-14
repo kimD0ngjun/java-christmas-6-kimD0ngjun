@@ -2,7 +2,6 @@ package christmas.controller;
 
 import static christmas.utility.NumberFormatter.formatNumber;
 
-import christmas.domain.OrderCalculator;
 import christmas.domain.benefits.Discount;
 import christmas.domain.menu.OrderList;
 import christmas.domain.price.SimpleTotalPrice;

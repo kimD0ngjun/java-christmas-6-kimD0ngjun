@@ -30,10 +30,29 @@ public class ExpectedPriceCalculatorTest {
                 new XMasDiscount()
         );
 
-        TotalDiscount totalDiscount = new TotalDiscount(discount);
+        TotalDiscount totalDiscount = new TotalDiscount(discount, totalPrice);
         ExpectedPriceCalculator calculator = new ExpectedPriceCalculator(totalPrice, totalDiscount);
         int expectedPrice = calculator.calculateExpectedPrice(orderList, date);
 
         assertEquals(223_577, expectedPrice);
+    }
+
+    @DisplayName("총주문 금액이 10_000원 이상이 안 되면, 어떤 할인 금액도 붙지 않는다.")
+    @Test
+    public void testExpectedPriceUnderStandard() {
+        List<String> orderListForm = Arrays.asList("시저샐러드-1");
+        OrderList orderList = new OrderList(orderListForm);
+        OrderDate date = new OrderDate(25);
+
+        TotalPrice totalPrice = new SimpleTotalPrice();
+        List<Discount> discount = Arrays.asList(new WeekDiscount(), new SpecialDiscount(),
+                new XMasDiscount()
+        );
+
+        TotalDiscount totalDiscount = new TotalDiscount(discount, totalPrice);
+        ExpectedPriceCalculator calculator = new ExpectedPriceCalculator(totalPrice, totalDiscount);
+        int expectedPrice = calculator.calculateExpectedPrice(orderList, date);
+
+        assertEquals(8_000, expectedPrice);
     }
 }

@@ -14,7 +14,6 @@ import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
-import christmas.domain.OrderCalculator;
 import christmas.service.ExpectedPriceCalculator;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.ListTypeChanger;
@@ -48,7 +47,7 @@ public class ChristmasController {
                 new XMasDiscount()
         );
 
-        TotalDiscount totalDiscount = new TotalDiscount(discounts);
+        TotalDiscount totalDiscount = new TotalDiscount(discounts, totalPrice);
         int total = totalDiscount.calculateTotalDiscount(orderList, orderDate);
 
         SpecialDiscount specialDiscount = new SpecialDiscount();
@@ -63,13 +62,12 @@ public class ChristmasController {
         Present present = new SimplePresent(totalPrice);
         int isPresent = present.calculatePresent(orderList);
 
-        TotalBenefitsCalculator totalBenefitsCalculator = new TotalBenefitsCalculator(present, totalDiscount);
-        int totalBenefits = totalBenefitsCalculator.calculateTotalBenefits(orderList, orderDate);
+        TotalBenefitsCalculator totalBenefits = new TotalBenefitsCalculator(present, totalDiscount);
+        int totalBenefitss = totalBenefits.calculateTotalBenefits(orderList, orderDate);
 
         ExpectedPriceCalculator expectedPriceCalculator = new ExpectedPriceCalculator(totalPrice, totalDiscount);
         int expectedPrice = expectedPriceCalculator.calculateExpectedPrice(orderList, orderDate);
 
-        OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
         OutputValue.guideTotalPrice(NumberFormatter.formatNumber(totalAmount));
@@ -77,11 +75,12 @@ public class ChristmasController {
 
         OutputValue.guideBenefits(totalPrice, orderList, orderDate, specialDiscount, xMasDiscount, weekDiscount);
 
-        OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalDiscount, present);
+        OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalDiscount, totalBenefits);
+
+        OutputValue.guideExpectedPrice(expectedPrice);
 
         //TODO
-        OutputValue.guideExpectedPrice(calculator);
-        OutputValue.guideBadge(calculator, badge);
+        OutputValue.guideBadge(totalBenefits, orderList, orderDate, badge);
     }
 
     private OrderDate getInputDate() {
