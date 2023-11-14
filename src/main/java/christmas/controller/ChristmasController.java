@@ -18,6 +18,7 @@ import christmas.domain.OrderCalculator;
 import christmas.service.ExpectedPriceCalculator;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.ListTypeChanger;
+import christmas.utility.NumberFormatter;
 import christmas.utility.NumberTypeChanger;
 import christmas.view.InputValue;
 import christmas.view.OutputValue;
@@ -71,11 +72,14 @@ public class ChristmasController {
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
-        OutputAssembler assembler = new OutputAssembler(totalPrice, orderList);
+        OutputAssembler assembler = new OutputAssembler(totalPrice, orderList, discounts);
 
-        OutputValue.guideTotalPrice(assembler.formatTotalPrice());
+        OutputValue.guideTotalPrice(NumberFormatter.formatNumber(totalAmount));
         OutputValue.guidePresent(totalAmount);
-        OutputValue.guideBenefits(calculator, orderDate);
+
+        OutputValue.guideBenefits(totalPrice, orderList, orderDate, specialDiscount, xMasDiscount, weekDiscount);
+
+        //TODO
         OutputValue.guideTotalBenefits(calculator);
         OutputValue.guideExpectedPrice(calculator);
         OutputValue.guideBadge(calculator, badge);

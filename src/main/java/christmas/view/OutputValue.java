@@ -1,10 +1,15 @@
 package christmas.view;
 
+import christmas.domain.benefits.SpecialDiscount;
+import christmas.domain.benefits.TotalDiscount;
+import christmas.domain.benefits.WeekDiscount;
+import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.date.OrderDate;
 import christmas.domain.menu.OrderList;
 import christmas.domain.menu.OrderMenu;
 import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
+import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
 import christmas.domain.OrderCalculator;
 import christmas.utility.NumberFormatter;
@@ -46,18 +51,23 @@ public class OutputValue {
     }
 
     // 혜택 내역 가이드
-    public static void guideBenefits(OrderCalculator result, OrderDate date) {
+    public static void guideBenefits(TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, SpecialDiscount specialDiscount, XMasDiscount xMasDiscount, WeekDiscount weekDiscount) {
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
 
-        if (result.getTotalPrice() < 10_000) {
+        int totalAmount = totalPrice.calculateTotalPrice(orderList);
+        int specialDiscountAmount = specialDiscount.calculateDiscount(orderList, orderDate);
+        int xMasDiscountAmount = xMasDiscount.calculateDiscount(orderList, orderDate);
+        int weekDiscountAmount = weekDiscount.calculateDiscount(orderList, orderDate);
+
+        if (totalAmount < 10_000) {
             System.out.println("없음");
         }
-        if (result.getTotalPrice() >= 10_000) {
-            printDiscount(OutputMessage.X_MAS_DISCOUNT, result.getXMasDiscountPrice());
-            printDiscount(getWeekDiscountMessage(date), result.getWeekDiscountPrice());
-            printDiscount(OutputMessage.SPECIAL_DISCOUNT, result.getSpecialDiscountPrice());
+        if (totalAmount >= 10_000) {
+            printDiscount(OutputMessage.X_MAS_DISCOUNT, xMasDiscountAmount);
+            printDiscount(getWeekDiscountMessage(orderDate), weekDiscountAmount);
+            printDiscount(OutputMessage.SPECIAL_DISCOUNT, specialDiscountAmount);
         }
-        if (result.getTotalPrice() >= 120_000) {
+        if (totalAmount >= 120_000) {
             System.out.println(OutputMessage.PRESENT_EVENT.getMessage());
         }
     }
