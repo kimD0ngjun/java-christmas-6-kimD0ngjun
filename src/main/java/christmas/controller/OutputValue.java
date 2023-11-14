@@ -1,8 +1,6 @@
-package christmas.view.output;
+package christmas.controller;
 
-import christmas.domain.benefits.Discount;
 import christmas.domain.benefits.SpecialDiscount;
-import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.benefits.WeekDiscount;
 import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.date.OrderDate;
@@ -14,24 +12,23 @@ import christmas.domain.price.TotalPrice;
 import christmas.view.message.OutputMessage;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
-import java.util.Arrays;
-import java.util.List;
+import christmas.view.output.GuideEvent;
 
 public class OutputValue {
 
     // 이벤트 안내
     public static void guideEvent(OrderDate orderDate) {
-        int date = orderDate.getDate();
-        System.out.printf("%s%n", OutputMessage.EVENT_GUIDE.getMessage(date));
+        GuideEvent guideEvent = new GuideEvent(orderDate);
+        guideEvent.displayEventGuide();
     }
 
     // 주문 메뉴 가이드
     public static void guideOrderMenu(OrderList orderList) {
         System.out.println(OutputMessage.ORDER_MENU_TITLE.getMessage());
         for (OrderMenu orderMenu : orderList.getOrderList()) {
-            System.out.println(
-                    OutputMessage.ORDER_MENU_INFO.getMessage(orderMenu.getMenuName(), orderMenu.getQuantity())
-            );
+            String menuName = orderMenu.getMenuName();
+            int menuQuantity = orderMenu.getQuantity();
+            System.out.println(OutputMessage.ORDER_MENU_INFO.getMessage(menuName, menuQuantity));
         }
     }
 

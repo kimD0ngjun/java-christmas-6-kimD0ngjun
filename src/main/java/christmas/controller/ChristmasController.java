@@ -17,10 +17,8 @@ import christmas.view.message.OutputMessage;
 import christmas.service.ExpectedPriceCalculator;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.ListTypeChanger;
-import christmas.utility.NumberFormatter;
 import christmas.utility.NumberTypeChanger;
 import christmas.view.input.InputValue;
-import christmas.view.output.OutputValue;
 import java.util.Arrays;
 import java.util.List;
 
