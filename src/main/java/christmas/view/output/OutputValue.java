@@ -69,22 +69,22 @@ public class OutputValue {
             guidePresentDiscount(totalPrice, orderList);
         }
     }
-    public static void guideXMasDiscount(OrderList orderList, OrderDate orderDate, XMasDiscount xMasDiscount) {
+    private static void guideXMasDiscount(OrderList orderList, OrderDate orderDate, XMasDiscount xMasDiscount) {
         int xMasDiscountAmount = xMasDiscount.calculateDiscount(orderList, orderDate);
         printDiscount(OutputMessage.X_MAS_DISCOUNT, xMasDiscountAmount);
     }
 
-    public static void guideWeekDiscount(OrderList orderList, OrderDate orderDate, WeekDiscount weekDiscount) {
+    private static void guideWeekDiscount(OrderList orderList, OrderDate orderDate, WeekDiscount weekDiscount) {
         int weekDiscountAmount = weekDiscount.calculateDiscount(orderList, orderDate);
         printDiscount(getWeekDiscountMessage(orderDate), weekDiscountAmount);
     }
 
-    public static void guideSpecialDiscount(OrderList orderList, OrderDate orderDate, SpecialDiscount specialDiscount) {
+    private static void guideSpecialDiscount(OrderList orderList, OrderDate orderDate, SpecialDiscount specialDiscount) {
         int specialDiscountAmount = specialDiscount.calculateDiscount(orderList, orderDate);
         printDiscount(OutputMessage.SPECIAL_DISCOUNT, specialDiscountAmount);
     }
 
-    public static void guidePresentDiscount(TotalPrice totalPrice, OrderList orderList) {
+    private static void guidePresentDiscount(TotalPrice totalPrice, OrderList orderList) {
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
         if (totalAmount >= 120_000) {
             System.out.println(OutputMessage.PRESENT_EVENT.getMessage());
@@ -106,20 +106,15 @@ public class OutputValue {
 
     // 총혜택 금액 가이드
     public static void guideTotalBenefits(
-            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalDiscount totalDiscount, TotalBenefitsCalculator totalBenefit) {
+            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalBenefitsCalculator totalBenefit) {
 
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
-        int totalDiscountAmount = totalDiscount.calculateTotalDiscount(orderList, orderDate);
         int totalBenefitAmount = totalBenefit.calculateTotalBenefits(orderList, orderDate);
 
         if (totalAmount < 10_000) {
             System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(0)));
         }
-        if (totalAmount < 120_000 && totalAmount >= 10_000) {
-            System.out.printf(
-                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-totalDiscountAmount)));
-        }
-        if (totalAmount >= 120_000) {
+        if (totalAmount >= 10_000) {
             System.out.printf(
                     "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-totalBenefitAmount)));
         }

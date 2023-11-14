@@ -65,7 +65,7 @@ public class ChristmasController {
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
         OutputValue.guideBenefits(totalPrice, orderList, orderDate);
         //TODO <총혜택 금액>
-        OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalDiscount, totalBenefits);
+        OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalBenefits);
         //TODO <할인 후 예상 결제 금액>
         OutputValue.guideExpectedPrice(expectedPrice);
         //TODO <12월 이벤트 배지>
