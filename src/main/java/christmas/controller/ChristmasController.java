@@ -56,7 +56,7 @@ public class ChristmasController {
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
         //TODO <할인 전 총주문 금액>
-        OutputValue.guideTotalPrice(totalAmount);
+        OutputValue.guideTotalPrice(orderList);
         //TODO <증정 메뉴>
         OutputValue.guidePresent(totalAmount);
         //TODO <혜택 내역>

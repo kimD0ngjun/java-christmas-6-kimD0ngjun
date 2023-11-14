@@ -8,11 +8,13 @@ import christmas.domain.menu.OrderList;
 import christmas.domain.menu.OrderMenu;
 import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
+import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
 import christmas.view.message.OutputMessage;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
 import christmas.view.output.GuideEvent;
+import christmas.view.output.GuideOrderMenu;
 
 public class OutputValue {
 
@@ -24,16 +26,14 @@ public class OutputValue {
 
     // 주문 메뉴 가이드
     public static void guideOrderMenu(OrderList orderList) {
-        System.out.println(OutputMessage.ORDER_MENU_TITLE.getMessage());
-        for (OrderMenu orderMenu : orderList.getOrderList()) {
-            String menuName = orderMenu.getMenuName();
-            int menuQuantity = orderMenu.getQuantity();
-            System.out.println(OutputMessage.ORDER_MENU_INFO.getMessage(menuName, menuQuantity));
-        }
+        GuideOrderMenu guideOrderMenu = new GuideOrderMenu(orderList);
+        guideOrderMenu.displayOrderMenu();
     }
 
     // 총주문 금액 가이드
-    public static void guideTotalPrice(int totalPrice) {
+    public static void guideTotalPrice(OrderList orderList) {
+        TotalPrice totalAmount = new SimpleTotalPrice();
+        int totalPrice = totalAmount.calculateTotalPrice(orderList);
         System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(NumberFormatter.formatNumber(totalPrice)));
     }
 
