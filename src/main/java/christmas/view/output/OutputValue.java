@@ -1,4 +1,4 @@
-package christmas.controller;
+package christmas.view.output;
 
 import christmas.domain.date.OrderDate;
 import christmas.domain.menu.OrderList;
