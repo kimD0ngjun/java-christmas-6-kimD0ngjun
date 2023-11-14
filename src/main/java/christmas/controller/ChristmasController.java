@@ -74,7 +74,7 @@ public class ChristmasController {
         OutputAssembler assembler = new OutputAssembler(totalPrice, orderList);
 
         OutputValue.guideTotalPrice(assembler.formatTotalPrice());
-        OutputValue.guidePresent(calculator);
+        OutputValue.guidePresent(totalAmount);
         OutputValue.guideBenefits(calculator, orderDate);
         OutputValue.guideTotalBenefits(calculator);
         OutputValue.guideExpectedPrice(calculator);

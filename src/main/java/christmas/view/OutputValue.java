@@ -36,11 +36,11 @@ public class OutputValue {
     }
 
     // 증정 메뉴 가이드
-    public static void guidePresent(OrderCalculator result) {
-        if (result.getTotalPrice() >= 120_000) {
+    public static void guidePresent(int totalPrice) {
+        if (totalPrice >= 120_000) {
             System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("샴페인 1개"));
         }
-        if (result.getTotalPrice() < 120_000) {
+        if (totalPrice < 120_000) {
             System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
         }
     }
