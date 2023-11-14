@@ -1,12 +1,8 @@
 package christmas.controller;
 
-import static christmas.utility.NumberFormatter.formatNumber;
-
 import christmas.domain.benefits.Discount;
 import christmas.domain.menu.OrderList;
-import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
-import christmas.message.OutputMessage;
 import christmas.utility.NumberFormatter;
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package christmas.domain.menu;
 
-import christmas.message.ErrorMessage;
+import christmas.view.message.ErrorMessage;
 
 public enum Menu {
     SOUP("양송이수프", 6_000, Category.APPETIZER),

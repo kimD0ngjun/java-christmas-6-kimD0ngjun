@@ -1,6 +1,6 @@
 package christmas.domain.badge;
 
-import christmas.message.OutputMessage;
+import christmas.view.message.OutputMessage;
 
 public class GiveBadge {
     private final OutputMessage message;

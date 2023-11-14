@@ -1,6 +1,6 @@
 package christmas.domain.date;
 
-import christmas.message.ErrorMessage;
+import christmas.view.message.ErrorMessage;
 import java.util.Calendar;
 import java.util.Set;
 

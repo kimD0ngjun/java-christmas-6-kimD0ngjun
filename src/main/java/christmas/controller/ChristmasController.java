@@ -13,14 +13,14 @@ import christmas.domain.benefits.WeekDiscount;
 import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
-import christmas.message.OutputMessage;
+import christmas.view.message.OutputMessage;
 import christmas.service.ExpectedPriceCalculator;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.ListTypeChanger;
 import christmas.utility.NumberFormatter;
 import christmas.utility.NumberTypeChanger;
-import christmas.view.InputValue;
-import christmas.view.OutputValue;
+import christmas.view.input.InputValue;
+import christmas.view.output.OutputValue;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,14 +32,13 @@ public class ChristmasController {
         System.out.println(OutputMessage.WELCOME.getMessage());
         orderDate = getInputDate();
         orderList = getInputOrderList();
+        //TODO 12월 25일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!
         OutputValue.guideEvent(orderDate);
+        //TODO <주문 메뉴>
         OutputValue.guideOrderMenu(orderList);
-
-        //TODO REFACTORING
 
         TotalPrice totalPrice = new SimpleTotalPrice();
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
-
 
         List<Discount> discounts = Arrays.asList(
                 new WeekDiscount(),
@@ -48,38 +47,28 @@ public class ChristmasController {
         );
 
         TotalDiscount totalDiscount = new TotalDiscount(discounts, totalPrice);
-        int total = totalDiscount.calculateTotalDiscount(orderList, orderDate);
-
-        SpecialDiscount specialDiscount = new SpecialDiscount();
-        int special = specialDiscount.calculateDiscount(orderList, orderDate);
-
-        XMasDiscount xMasDiscount = new XMasDiscount();
-        int xMas = xMasDiscount.calculateDiscount(orderList, orderDate);
-
-        WeekDiscount weekDiscount = new WeekDiscount();
-        int week = weekDiscount.calculateDiscount(orderList, orderDate);
 
         Present present = new SimplePresent(totalPrice);
-        int isPresent = present.calculatePresent(orderList);
 
         TotalBenefitsCalculator totalBenefits = new TotalBenefitsCalculator(present, totalDiscount);
-        int totalBenefitss = totalBenefits.calculateTotalBenefits(orderList, orderDate);
 
         ExpectedPriceCalculator expectedPriceCalculator = new ExpectedPriceCalculator(totalPrice, totalDiscount);
         int expectedPrice = expectedPriceCalculator.calculateExpectedPrice(orderList, orderDate);
 
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
-        OutputValue.guideTotalPrice(NumberFormatter.formatNumber(totalAmount));
+        //TODO <할인 전 총주문 금액>
+        OutputValue.guideTotalPrice(totalAmount);
+        //TODO <증정 메뉴>
         OutputValue.guidePresent(totalAmount);
-
-        OutputValue.guideBenefits(totalPrice, orderList, orderDate, specialDiscount, xMasDiscount, weekDiscount);
-
+        //TODO <혜택 내역>
+        System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
+        OutputValue.guideBenefits(totalPrice, orderList, orderDate);
+        //TODO <총혜택 금액>
         OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalDiscount, totalBenefits);
-
+        //TODO <할인 후 예상 결제 금액>
         OutputValue.guideExpectedPrice(expectedPrice);
-
-        //TODO
+        //TODO <12월 이벤트 배지>
         OutputValue.guideBadge(totalBenefits, orderList, orderDate, badge);
     }
 

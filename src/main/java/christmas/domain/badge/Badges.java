@@ -1,6 +1,6 @@
 package christmas.domain.badge;
 
-import christmas.message.OutputMessage;
+import christmas.view.message.OutputMessage;
 
 // 캡슐화를 위한 열거형
 public enum Badges {

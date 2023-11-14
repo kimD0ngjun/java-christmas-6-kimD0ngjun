@@ -1,6 +1,6 @@
-package christmas.view;
+package christmas.view.output;
 
-import christmas.domain.benefits.Present;
+import christmas.domain.benefits.Discount;
 import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.benefits.WeekDiscount;
@@ -11,14 +11,13 @@ import christmas.domain.menu.OrderMenu;
 import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
 import christmas.domain.price.TotalPrice;
-import christmas.message.OutputMessage;
+import christmas.view.message.OutputMessage;
 import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.List;
 
 public class OutputValue {
-    // int 포맷팅 메소드
 
     // 이벤트 안내
     public static void guideEvent(OrderDate orderDate) {
@@ -37,8 +36,8 @@ public class OutputValue {
     }
 
     // 총주문 금액 가이드
-    public static void guideTotalPrice(String totalPrice) {
-        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(totalPrice));
+    public static void guideTotalPrice(int totalPrice) {
+        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(NumberFormatter.formatNumber(totalPrice)));
     }
 
     // 증정 메뉴 가이드
@@ -52,22 +51,41 @@ public class OutputValue {
     }
 
     // 혜택 내역 가이드
-    public static void guideBenefits(TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, SpecialDiscount specialDiscount, XMasDiscount xMasDiscount, WeekDiscount weekDiscount) {
-        System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
+
+    public static void guideBenefits(TotalPrice totalPrice, OrderList orderList, OrderDate orderDate) {
+        SpecialDiscount specialDiscount = new SpecialDiscount();
+        XMasDiscount xMasDiscount = new XMasDiscount();
+        WeekDiscount weekDiscount = new WeekDiscount();
 
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
-        int specialDiscountAmount = specialDiscount.calculateDiscount(orderList, orderDate);
-        int xMasDiscountAmount = xMasDiscount.calculateDiscount(orderList, orderDate);
-        int weekDiscountAmount = weekDiscount.calculateDiscount(orderList, orderDate);
 
         if (totalAmount < 10_000) {
             System.out.println("없음");
         }
         if (totalAmount >= 10_000) {
-            printDiscount(OutputMessage.X_MAS_DISCOUNT, xMasDiscountAmount);
-            printDiscount(getWeekDiscountMessage(orderDate), weekDiscountAmount);
-            printDiscount(OutputMessage.SPECIAL_DISCOUNT, specialDiscountAmount);
+            guideXMasDiscount(orderList, orderDate, xMasDiscount);
+            guideWeekDiscount(orderList, orderDate, weekDiscount);
+            guideSpecialDiscount(orderList, orderDate, specialDiscount);
+            guidePresentDiscount(totalPrice, orderList);
         }
+    }
+    public static void guideXMasDiscount(OrderList orderList, OrderDate orderDate, XMasDiscount xMasDiscount) {
+        int xMasDiscountAmount = xMasDiscount.calculateDiscount(orderList, orderDate);
+        printDiscount(OutputMessage.X_MAS_DISCOUNT, xMasDiscountAmount);
+    }
+
+    public static void guideWeekDiscount(OrderList orderList, OrderDate orderDate, WeekDiscount weekDiscount) {
+        int weekDiscountAmount = weekDiscount.calculateDiscount(orderList, orderDate);
+        printDiscount(getWeekDiscountMessage(orderDate), weekDiscountAmount);
+    }
+
+    public static void guideSpecialDiscount(OrderList orderList, OrderDate orderDate, SpecialDiscount specialDiscount) {
+        int specialDiscountAmount = specialDiscount.calculateDiscount(orderList, orderDate);
+        printDiscount(OutputMessage.SPECIAL_DISCOUNT, specialDiscountAmount);
+    }
+
+    public static void guidePresentDiscount(TotalPrice totalPrice, OrderList orderList) {
+        int totalAmount = totalPrice.calculateTotalPrice(orderList);
         if (totalAmount >= 120_000) {
             System.out.println(OutputMessage.PRESENT_EVENT.getMessage());
         }

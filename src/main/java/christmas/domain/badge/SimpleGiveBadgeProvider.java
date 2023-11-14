@@ -1,6 +1,6 @@
 package christmas.domain.badge;
 
-import christmas.message.OutputMessage;
+import christmas.view.message.OutputMessage;
 
 // 실제로 배지를 결정하는 구체 전략
 public class SimpleGiveBadgeProvider implements GiveBadgeProvider {

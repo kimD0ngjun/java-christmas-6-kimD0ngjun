@@ -31,7 +31,7 @@ public class OrderList {
     }
 
     // 입력값 유효성 검증하는 메소드
-    private static void validateValue(List<OrderMenu> form) {
+    private void validateValue(List<OrderMenu> form) {
         OrderValueValidator.hasDuplicateMenus(form);
         OrderValueValidator.isTotalQuantityValid(form);
         OrderValueValidator.validateBeverageOnlyCategory(form);

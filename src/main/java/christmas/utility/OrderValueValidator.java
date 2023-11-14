@@ -2,7 +2,7 @@ package christmas.utility;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.OrderMenu;
-import christmas.message.ErrorMessage;
+import christmas.view.message.ErrorMessage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -1,6 +1,6 @@
 package christmas.utility;
 
-import christmas.message.ErrorMessage;
+import christmas.view.message.ErrorMessage;
 import java.util.List;
 
 public class OrderFormValidator {

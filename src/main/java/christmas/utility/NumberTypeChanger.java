@@ -1,6 +1,6 @@
 package christmas.utility;
 
-import christmas.message.ErrorMessage;
+import christmas.view.message.ErrorMessage;
 
 public class NumberTypeChanger {
     private static final String MATCH_NUMBER = "\\d+";
