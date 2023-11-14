@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.benefits.Present;
 import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.TotalDiscount;
 import christmas.domain.benefits.WeekDiscount;
@@ -12,6 +13,7 @@ import christmas.domain.badge.GiveBadgeProvider;
 import christmas.domain.price.TotalPrice;
 import christmas.message.OutputMessage;
 import christmas.domain.OrderCalculator;
+import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -86,30 +88,38 @@ public class OutputValue {
     }
 
     // 총혜택 금액 가이드
-    public static void guideTotalBenefits(OrderCalculator result) {
-        if (result.getTotalPrice() < 10_000) {
+    public static void guideTotalBenefits(
+            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalDiscount totalDiscount, Present present) {
+
+        int totalAmount = totalPrice.calculateTotalPrice(orderList);
+        int totalDiscountAmount = totalDiscount.calculateTotalDiscount(orderList, orderDate);
+
+        TotalBenefitsCalculator benefit = new TotalBenefitsCalculator(present, totalDiscount);
+        int totalBenefitAmount = benefit.calculateTotalBenefits(orderList, orderDate);
+
+        if (totalAmount < 10_000) {
             System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(0)));
         }
-        if (result.getTotalPrice() < 120_000 && result.getTotalPrice() >= 10_000) {
+        if (totalAmount < 120_000 && totalAmount >= 10_000) {
             System.out.printf(
-                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-getTotalDiscount(result))));
+                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-totalDiscountAmount)));
         }
-        if (result.getTotalPrice() >= 120_000) {
+        if (totalAmount >= 120_000) {
             System.out.printf(
-                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-getTotalBenefits(result))));
+                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-totalBenefitAmount)));
         }
     }
 
-    private static int getTotalDiscount(OrderCalculator result) {
-        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
-    }
-
-    private static int getTotalBenefits(OrderCalculator result) {
-        if (result.getTotalPrice() >= 120_000) {
-            return getTotalDiscount(result) + 25_000;
-        }
-        return getTotalDiscount(result);
-    }
+//    private static int getTotalDiscount(OrderCalculator result) {
+//        return result.getSpecialDiscountPrice() + result.getWeekDiscountPrice() + result.getXMasDiscountPrice();
+//    }
+//
+//    private static int getTotalBenefits(OrderCalculator result) {
+//        if (result.getTotalPrice() >= 120_000) {
+//            return getTotalDiscount(result) + 25_000;
+//        }
+//        return getTotalDiscount(result);
+//    }
 
     // 할인 후 예상 결제 금액 가이드
     public static void guideExpectedPrice(OrderCalculator result) {

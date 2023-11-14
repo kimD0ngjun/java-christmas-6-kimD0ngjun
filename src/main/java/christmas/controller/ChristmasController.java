@@ -72,15 +72,14 @@ public class ChristmasController {
         OrderCalculator calculator = new OrderCalculator(orderList, orderDate);
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
-        OutputAssembler assembler = new OutputAssembler(totalPrice, orderList, discounts);
-
         OutputValue.guideTotalPrice(NumberFormatter.formatNumber(totalAmount));
         OutputValue.guidePresent(totalAmount);
 
         OutputValue.guideBenefits(totalPrice, orderList, orderDate, specialDiscount, xMasDiscount, weekDiscount);
 
+        OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalDiscount, present);
+
         //TODO
-        OutputValue.guideTotalBenefits(calculator);
         OutputValue.guideExpectedPrice(calculator);
         OutputValue.guideBadge(calculator, badge);
     }
