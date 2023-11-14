@@ -16,32 +16,26 @@ import christmas.view.output.orderListArgument.GuidePresent;
 import christmas.view.output.orderListArgument.GuideTotalPrice;
 
 public class OutputValue {
-
-    // 이벤트 안내
     public static void guideEvent(OrderDate orderDate) {
         GuideEvent guideEvent = new GuideEvent(orderDate);
         guideEvent.displayEventGuide();
     }
 
-    // 주문 메뉴 가이드
     public static void guideOrderMenu(OrderList orderList) {
         GuideOrderMenu guideOrderMenu = new GuideOrderMenu(orderList);
         guideOrderMenu.displayOrderMenu();
     }
 
-    // 총주문 금액 가이드
     public static void guideTotalPrice(OrderList orderList) {
         GuideTotalPrice guideTotalPrice = new GuideTotalPrice(orderList);
         guideTotalPrice.displayTotalPrice();
     }
 
-    // 증정 메뉴 가이드
     public static void guidePresent(OrderList orderList) {
         GuidePresent guidePresent = new GuidePresent(orderList);
         guidePresent.displayPresent();
     }
 
-    // 혜택 내역 가이드
     public static void guideBenefits(
             TotalPrice totalPrice,
             OrderList orderList,
@@ -50,7 +44,6 @@ public class OutputValue {
         guideBenefits.displayBenefits();
     }
 
-    // 총혜택 금액 가이드
     public static void guideTotalBenefits(
             TotalPrice totalPrice,
             OrderList orderList,
@@ -61,7 +54,6 @@ public class OutputValue {
         guideTotalBenefits.displayTotalBenefits();
     }
 
-    // 할인 후 예상 결제 금액 가이드
     public static void guideExpectedPrice(
             ExpectedPriceCalculator calculator,
             OrderList orderList,
@@ -71,7 +63,6 @@ public class OutputValue {
         guideExpectedPrice.displayExpectedPrice();
     }
 
-    // 배지 부여 가이드
     public static void guideBadge(
             TotalBenefitsCalculator totalBenefit,
             OrderList orderList,

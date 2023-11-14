@@ -17,17 +17,14 @@ public class OrderMenu {
         return orderMenu.getName();
     }
 
-    // 주문 메뉴의 수량 반환
     public int getQuantity() {
         return quantity;
     }
 
-    // 주문 메뉴의 총 가격 반환
     public int getTotalPrice() {
         return orderMenu.getPrice() * quantity;
     }
 
-    // 주문 메뉴의 카테고리 반환
     public Menu.Category getCategory() {
         return orderMenu.getCategory();
     }

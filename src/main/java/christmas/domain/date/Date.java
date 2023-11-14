@@ -27,9 +27,7 @@ public enum Date {
     }
 
     public static Set<Integer> getSpecialDiscountDates() {
-        // 특별 할인 날짜만 추출하여 Set으로 반환
-        Set<Integer> specialDiscountDates = new HashSet<>();
-        specialDiscountDates.addAll(Arrays.asList(
+        Set<Integer> specialDiscountDates = new HashSet<>(Arrays.asList(
                 SPECIAL_DISCOUNT_1.getDate(),
                 SPECIAL_DISCOUNT_2.getDate(),
                 SPECIAL_DISCOUNT_3.getDate(),

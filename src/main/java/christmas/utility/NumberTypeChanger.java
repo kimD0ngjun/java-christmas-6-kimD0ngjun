@@ -11,14 +11,12 @@ public class NumberTypeChanger {
         return Integer.parseInt(input);
     }
 
-    // 숫자 맞는지
     private static void validateNumber(String input) {
         if (!isNumeric(input)) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_DATE.getMessage());
         }
     }
 
-    // 숫자 아닌 다른 문자들 포함시켜서 입력한 경우
     private static void parseIntOrThrow(String input) {
         try {
             Integer.parseInt(input);

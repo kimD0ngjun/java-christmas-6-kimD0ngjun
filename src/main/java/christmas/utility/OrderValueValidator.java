@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public class OrderValueValidator {
+    private final static int OVER_QUANTITY = 21;
+
     public static void hasDuplicateMenus(List<OrderMenu> orderList) {
         Set<Menu> uniqueMenus = new HashSet<>();
 
@@ -25,7 +27,7 @@ public class OrderValueValidator {
                 .mapToInt(OrderMenu::getQuantity)
                 .sum();
 
-        if (totalQuantity >= 21) {
+        if (totalQuantity >= OVER_QUANTITY) {
             throw new IllegalArgumentException(ErrorMessage.LIMIT_QUANTITY.getMessage());
         }
     }

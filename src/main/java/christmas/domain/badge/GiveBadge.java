@@ -17,10 +17,6 @@ public class GiveBadge {
         return message;
     }
 
-    public int getLimitAmount() {
-        return limitAmount;
-    }
-
     public String getBadge() {
         return badge;
     }

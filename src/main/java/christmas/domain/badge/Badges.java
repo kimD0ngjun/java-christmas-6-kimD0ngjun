@@ -2,7 +2,6 @@ package christmas.domain.badge;
 
 import christmas.view.message.OutputMessage;
 
-// 캡슐화를 위한 열거형
 public enum Badges {
     NONE(OutputMessage.BADGE, 4_999, "없음"),
     STAR(OutputMessage.BADGE, 9_999, "별"),
