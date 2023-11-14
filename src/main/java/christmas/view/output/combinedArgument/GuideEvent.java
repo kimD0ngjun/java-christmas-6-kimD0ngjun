@@ -1,4 +1,4 @@
-package christmas.view.output;
+package christmas.view.output.combinedArgument;
 
 import christmas.domain.date.OrderDate;
 import christmas.view.message.OutputMessage;

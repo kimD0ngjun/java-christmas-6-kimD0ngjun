@@ -1,4 +1,4 @@
-package christmas.view.output;
+package christmas.view.output.orderListArgument;
 
 import christmas.domain.menu.OrderList;
 import christmas.domain.price.SimpleTotalPrice;

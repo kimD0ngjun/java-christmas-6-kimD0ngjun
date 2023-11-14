@@ -36,7 +36,6 @@ public class ChristmasController {
         OutputValue.guideOrderMenu(orderList);
 
         TotalPrice totalPrice = new SimpleTotalPrice();
-        int totalAmount = totalPrice.calculateTotalPrice(orderList);
 
         List<Discount> discounts = Arrays.asList(
                 new WeekDiscount(),
@@ -51,7 +50,6 @@ public class ChristmasController {
         TotalBenefitsCalculator totalBenefits = new TotalBenefitsCalculator(present, totalDiscount);
 
         ExpectedPriceCalculator expectedPriceCalculator = new ExpectedPriceCalculator(totalPrice, totalDiscount);
-        int expectedPrice = expectedPriceCalculator.calculateExpectedPrice(orderList, orderDate);
 
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
@@ -59,13 +57,12 @@ public class ChristmasController {
         OutputValue.guideTotalPrice(orderList);
         //TODO <증정 메뉴>ㅇㅋ
         OutputValue.guidePresent(orderList);
-        //TODO <혜택 내역>
-        System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
+        //TODO <혜택 내역>dz
         OutputValue.guideBenefits(totalPrice, orderList, orderDate);
-        //TODO <총혜택 금액>
+        //TODO <총혜택 금액>dz
         OutputValue.guideTotalBenefits(totalPrice, orderList, orderDate, totalBenefits);
         //TODO <할인 후 예상 결제 금액>
-        OutputValue.guideExpectedPrice(expectedPrice);
+        OutputValue.guideExpectedPrice(expectedPriceCalculator, orderList, orderDate);
         //TODO <12월 이벤트 배지>
         OutputValue.guideBadge(totalBenefits, orderList, orderDate, badge);
     }

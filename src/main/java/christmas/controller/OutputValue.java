@@ -1,23 +1,19 @@
 package christmas.controller;
 
-import christmas.domain.benefits.SpecialDiscount;
-import christmas.domain.benefits.WeekDiscount;
-import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.date.OrderDate;
 import christmas.domain.menu.OrderList;
-import christmas.domain.menu.OrderMenu;
-import christmas.domain.badge.GiveBadge;
 import christmas.domain.badge.GiveBadgeProvider;
-import christmas.domain.price.SimpleTotalPrice;
 import christmas.domain.price.TotalPrice;
-import christmas.view.message.OutputMessage;
+import christmas.service.ExpectedPriceCalculator;
 import christmas.service.TotalBenefitsCalculator;
-import christmas.utility.NumberFormatter;
-import christmas.view.output.GuideBenefits;
-import christmas.view.output.GuideEvent;
-import christmas.view.output.GuideOrderMenu;
-import christmas.view.output.GuidePresent;
-import christmas.view.output.GuideTotalPrice;
+import christmas.view.output.combinedArgument.GuideBadge;
+import christmas.view.output.combinedArgument.GuideBenefits;
+import christmas.view.output.combinedArgument.GuideEvent;
+import christmas.view.output.combinedArgument.GuideExpectedPrice;
+import christmas.view.output.combinedArgument.GuideTotalBenefits;
+import christmas.view.output.orderListArgument.GuideOrderMenu;
+import christmas.view.output.orderListArgument.GuidePresent;
+import christmas.view.output.orderListArgument.GuideTotalPrice;
 
 public class OutputValue {
 
@@ -46,39 +42,42 @@ public class OutputValue {
     }
 
     // 혜택 내역 가이드
-    public static void guideBenefits(TotalPrice totalPrice, OrderList orderList, OrderDate orderDate) {
+    public static void guideBenefits(
+            TotalPrice totalPrice,
+            OrderList orderList,
+            OrderDate orderDate) {
         GuideBenefits guideBenefits = new GuideBenefits(totalPrice, orderList, orderDate);
         guideBenefits.displayBenefits();
     }
 
     // 총혜택 금액 가이드
     public static void guideTotalBenefits(
-            TotalPrice totalPrice, OrderList orderList, OrderDate orderDate, TotalBenefitsCalculator totalBenefit) {
-
-        int totalAmount = totalPrice.calculateTotalPrice(orderList);
-        int totalBenefitAmount = totalBenefit.calculateTotalBenefits(orderList, orderDate);
-
-        if (totalAmount < 10_000) {
-            System.out.printf("%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(0)));
-        }
-        if (totalAmount >= 10_000) {
-            System.out.printf(
-                    "%s%n", OutputMessage.TOTAL_BENEFITS.getMessage(NumberFormatter.formatNumber(-totalBenefitAmount)));
-        }
+            TotalPrice totalPrice,
+            OrderList orderList,
+            OrderDate orderDate,
+            TotalBenefitsCalculator totalBenefits) {
+        GuideTotalBenefits guideTotalBenefits =
+                new GuideTotalBenefits(totalPrice,orderList, orderDate, totalBenefits);
+        guideTotalBenefits.displayTotalBenefits();
     }
 
     // 할인 후 예상 결제 금액 가이드
-    public static void guideExpectedPrice(int expectedPrice) {
-        System.out.printf("%s%n", OutputMessage.EXPECTED_PRICE.getMessage(NumberFormatter.formatNumber(expectedPrice)));
+    public static void guideExpectedPrice(
+            ExpectedPriceCalculator calculator,
+            OrderList orderList,
+            OrderDate orderDate) {
+        GuideExpectedPrice guideExpectedPrice =
+                new GuideExpectedPrice(calculator, orderList, orderDate);
+        guideExpectedPrice.displayExpectedPrice();
     }
 
     // 배지 부여 가이드
     public static void guideBadge(
-            TotalBenefitsCalculator totalBenefit, OrderList orderList, OrderDate orderDate, GiveBadgeProvider badgeProvider) {
-        int totalBenefitAmount = totalBenefit.calculateTotalBenefits(orderList, orderDate);
-
-        GiveBadge badge = badgeProvider.getBadge(totalBenefitAmount);
-
-        System.out.printf("%s%n", badge.getMessage().getMessage(badge.getBadge()));
+            TotalBenefitsCalculator totalBenefit,
+            OrderList orderList,
+            OrderDate orderDate,
+            GiveBadgeProvider badgeProvider) {
+        GuideBadge guideBadge = new GuideBadge(totalBenefit, orderList, orderDate, badgeProvider);
+        guideBadge.displayBadge();
     }
 }
