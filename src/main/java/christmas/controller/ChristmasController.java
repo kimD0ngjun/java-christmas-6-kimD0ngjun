@@ -30,9 +30,9 @@ public class ChristmasController {
         System.out.println(OutputMessage.WELCOME.getMessage());
         orderDate = getInputDate();
         orderList = getInputOrderList();
-        //TODO 12월 25일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!
+        //TODO 12월 25일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!dz
         OutputValue.guideEvent(orderDate);
-        //TODO <주문 메뉴>
+        //TODO <주문 메뉴>dz
         OutputValue.guideOrderMenu(orderList);
 
         TotalPrice totalPrice = new SimpleTotalPrice();
@@ -55,10 +55,10 @@ public class ChristmasController {
 
         GiveBadgeProvider badge = new SimpleGiveBadgeProvider();
 
-        //TODO <할인 전 총주문 금액>
+        //TODO <할인 전 총주문 금액>ㅇㅋ
         OutputValue.guideTotalPrice(orderList);
-        //TODO <증정 메뉴>
-        OutputValue.guidePresent(totalAmount);
+        //TODO <증정 메뉴>ㅇㅋ
+        OutputValue.guidePresent(orderList);
         //TODO <혜택 내역>
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
         OutputValue.guideBenefits(totalPrice, orderList, orderDate);

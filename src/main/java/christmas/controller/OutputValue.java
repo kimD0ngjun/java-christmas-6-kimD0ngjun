@@ -15,6 +15,8 @@ import christmas.service.TotalBenefitsCalculator;
 import christmas.utility.NumberFormatter;
 import christmas.view.output.GuideEvent;
 import christmas.view.output.GuideOrderMenu;
+import christmas.view.output.GuidePresent;
+import christmas.view.output.GuideTotalPrice;
 
 public class OutputValue {
 
@@ -32,23 +34,17 @@ public class OutputValue {
 
     // 총주문 금액 가이드
     public static void guideTotalPrice(OrderList orderList) {
-        TotalPrice totalAmount = new SimpleTotalPrice();
-        int totalPrice = totalAmount.calculateTotalPrice(orderList);
-        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(NumberFormatter.formatNumber(totalPrice)));
+        GuideTotalPrice guideTotalPrice = new GuideTotalPrice(orderList);
+        guideTotalPrice.displayTotalPrice();
     }
 
     // 증정 메뉴 가이드
-    public static void guidePresent(int totalPrice) {
-        if (totalPrice >= 120_000) {
-            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("샴페인 1개"));
-        }
-        if (totalPrice < 120_000) {
-            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
-        }
+    public static void guidePresent(OrderList orderList) {
+        GuidePresent guidePresent = new GuidePresent(orderList);
+        guidePresent.displayPresent();
     }
 
     // 혜택 내역 가이드
-
     public static void guideBenefits(TotalPrice totalPrice, OrderList orderList, OrderDate orderDate) {
         SpecialDiscount specialDiscount = new SpecialDiscount();
         XMasDiscount xMasDiscount = new XMasDiscount();
