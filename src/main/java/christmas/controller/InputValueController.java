@@ -8,7 +8,7 @@ import christmas.view.input.DateInput;
 import christmas.view.input.OrderInput;
 import java.util.List;
 
-public class InputController {
+public class InputValueController {
     public static OrderDate getInputDate() {
         while (true) {
             try {
