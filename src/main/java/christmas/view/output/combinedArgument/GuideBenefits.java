@@ -35,7 +35,9 @@ public class GuideBenefits {
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
 
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
-        if (totalAmount < LIMIT_PRICE) {System.out.println(NONE);}
+        if (totalAmount < LIMIT_PRICE) {
+            System.out.println(NONE);
+        }
         if (totalAmount >= LIMIT_PRICE) {
             guideAllDiscounts(orderList, orderDate);
             guidePresentDiscount(totalPrice, orderList);
