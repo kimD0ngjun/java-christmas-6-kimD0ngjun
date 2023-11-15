@@ -1,13 +1,16 @@
 package christmas.view.output.combinedArgument;
 
+import christmas.domain.benefits.Discount;
 import christmas.domain.benefits.SpecialDiscount;
 import christmas.domain.benefits.WeekDiscount;
 import christmas.domain.benefits.XMasDiscount;
 import christmas.domain.date.OrderDate;
 import christmas.domain.menu.OrderList;
 import christmas.domain.price.TotalPrice;
+import christmas.factory.DiscountFactory;
 import christmas.utility.NumberFormatter;
 import christmas.view.message.OutputMessage;
+import java.util.List;
 
 public class GuideBenefits {
     private final int STANDARD_PRICE = 120_000;
@@ -29,18 +32,28 @@ public class GuideBenefits {
     }
 
     public void displayBenefits() {
-        SpecialDiscount specialDiscount = new SpecialDiscount();
-        XMasDiscount xMasDiscount = new XMasDiscount();
-        WeekDiscount weekDiscount = new WeekDiscount();
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
 
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
         if (totalAmount < LIMIT_PRICE) {System.out.println(NONE);}
         if (totalAmount >= LIMIT_PRICE) {
-            guideXMasDiscount(orderList, orderDate, xMasDiscount);
-            guideWeekDiscount(orderList, orderDate, weekDiscount);
-            guideSpecialDiscount(orderList, orderDate, specialDiscount);
+            guideAllDiscounts(orderList, orderDate);
             guidePresentDiscount(totalPrice, orderList);
+        }
+    }
+
+    private void guideAllDiscounts(OrderList orderList, OrderDate orderDate) {
+        List<Discount> discounts = DiscountFactory.createDiscounts();
+        for (Discount discount : discounts) {
+            if (discount instanceof XMasDiscount) {
+                guideXMasDiscount(orderList, orderDate, (XMasDiscount) discount);
+            }
+            if (discount instanceof WeekDiscount) {
+                guideWeekDiscount(orderList, orderDate, (WeekDiscount) discount);
+            }
+            if (discount instanceof SpecialDiscount) {
+                guideSpecialDiscount(orderList, orderDate, (SpecialDiscount) discount);
+            }
         }
     }
 
