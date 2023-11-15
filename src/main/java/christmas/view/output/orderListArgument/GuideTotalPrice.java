@@ -16,6 +16,7 @@ public class GuideTotalPrice {
     public void displayTotalPrice() {
         TotalPrice totalAmount = new SimpleTotalPrice();
         int totalPrice = totalAmount.calculateTotalPrice(orderList);
-        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(NumberFormatter.formatNumber(totalPrice)));
+        String totalPriceString = NumberFormatter.formatNumber(totalPrice);
+        System.out.printf("%s%n", OutputMessage.TOTAL_PRICE.getMessage(totalPriceString));
     }
 }

@@ -1,9 +1,6 @@
 package christmas.view.message;
 
-import christmas.domain.date.OrderDate;
-import christmas.view.output.combinedArgument.GuideEvent;
-
-public class GuideMessage {
+public class GuideProcedure {
     public static void welcome() {
         System.out.println(OutputMessage.WELCOME.getMessage());
     }

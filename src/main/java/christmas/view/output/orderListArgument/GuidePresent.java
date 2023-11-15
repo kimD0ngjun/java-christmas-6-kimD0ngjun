@@ -7,6 +7,8 @@ import christmas.view.message.OutputMessage;
 
 public class GuidePresent {
     private final int STANDARD_TOTAL_PRICE = 120_000;
+    private final String CHAMPAGNE = "샴페인 1개";
+    private final String NONE = "없음";
 
     private final OrderList orderList;
 
@@ -18,10 +20,10 @@ public class GuidePresent {
         TotalPrice totalAmount = new SimpleTotalPrice();
         int totalPrice = totalAmount.calculateTotalPrice(orderList);
         if (totalPrice >= STANDARD_TOTAL_PRICE) {
-            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("샴페인 1개"));
+            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage(CHAMPAGNE));
         }
         if (totalPrice < STANDARD_TOTAL_PRICE) {
-            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage("없음"));
+            System.out.printf("%s%n", OutputMessage.PRESENT.getMessage(NONE));
         }
     }
 }

@@ -37,13 +37,11 @@ public class OrderValueValidator {
 
         for (OrderMenu order : orderList) {
             if (order.getMenu().getCategory() != Menu.Category.BEVERAGE) {
-                // BEVERAGE 카테고리 이외의 다른 카테고리가 발견되면 예외 발생
                 return;
             }
             hasBeverage = true;
         }
 
-        // BEVERAGE 카테고리만 있는 경우 예외 발생
         if (hasBeverage) {
             throw new IllegalArgumentException(ErrorMessage.ONLY_BEVERAGE.getMessage());
         }

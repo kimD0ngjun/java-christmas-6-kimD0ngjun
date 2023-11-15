@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ListTypeChanger {
+    private final static String COMMA = ",";
+
     public static List<String> changeListType(String input) {
         verifyComma(input);
         String[] orderUnit = input.split(",");
@@ -15,7 +17,7 @@ public class ListTypeChanger {
     }
 
     private static void verifyComma(String input) {
-        if (input.endsWith(",")) {
+        if (input.endsWith(COMMA)) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_ORDER.getMessage());
         }
     }
@@ -32,12 +34,10 @@ public class ListTypeChanger {
         }
     }
 
-    // 빈 문자열 검증
     private static boolean validateEmpty(String orderElement) {
         return !orderElement.isBlank();
     }
 
-    // 요소 시작, 마지막 인덱스에 "-" 있는지 검증
     private static boolean validateDash(String orderElement) {
         return !orderElement.startsWith("-") && !orderElement.endsWith("-");
     }

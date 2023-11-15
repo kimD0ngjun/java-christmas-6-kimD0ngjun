@@ -10,13 +10,14 @@ import christmas.utility.NumberFormatter;
 import christmas.view.message.OutputMessage;
 
 public class GuideBenefits {
-    private TotalPrice totalPrice;
-    private OrderList orderList;
-    private OrderDate orderDate;
-
     private final int STANDARD_PRICE = 120_000;
     private final int LIMIT_PRICE = 10_000;
     private final int LIMIT_DISCOUNT = 0;
+    private final String NONE = "없음";
+
+    private TotalPrice totalPrice;
+    private OrderList orderList;
+    private OrderDate orderDate;
 
     public GuideBenefits(
             TotalPrice totalPrice,
@@ -34,7 +35,7 @@ public class GuideBenefits {
         int totalAmount = totalPrice.calculateTotalPrice(orderList);
 
         System.out.println(OutputMessage.BENEFITS_GUIDE.getMessage());
-        if (totalAmount < LIMIT_PRICE) {System.out.println("없음");}
+        if (totalAmount < LIMIT_PRICE) {System.out.println(NONE);}
         if (totalAmount >= LIMIT_PRICE) {
             guideXMasDiscount(orderList, orderDate, xMasDiscount);
             guideWeekDiscount(orderList, orderDate, weekDiscount);
